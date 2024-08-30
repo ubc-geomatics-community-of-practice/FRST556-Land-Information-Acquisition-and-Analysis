@@ -1,0 +1,185 @@
+---
+title: "06 -  VDYP & TIPSY for Forecasting Inventory Records"
+author: "Sarah Smith-Tripp"
+format: html
+editor: visual
+---
+
+## Lab Overview {.unnumbered}
+
+For timber supply (and other forest-level analyses), forecasts of each stand (or aggregates of similar stands) are needed to evaluate different management scenarios. For these analyses, yield tables for each stand type and management regime are needed to make these forecasts. In BC, VDYP is used for “unmanaged” stands and TIPSY is used for “managed” stands. There are other models (e.g., PrognosisBC) also available for use by BC forest professionals. :::{.callout-note collapse='true'} \## Growth & Yield Models in BC
+
+**TIPSY**
+
+-   For managed stands
+
+-   Used in Timber Supply Analysis for managed stands (i.e., post harvest)
+
+-   Can also be used for “silvicultural gaming”
+
+-   Prorates pure species stand yields to get mixed species stand yields (as does VDYP)
+
+-   Can add silvicultural treatments
+
+-   Look up forecasts from a database using the input variables you supply
+
+    -   Where did this database come from? Run TASS -\> get yield tables and other things -\> add to TIPSY’s database -\> now ready to use in TIPSY - Where is TASS from?
+    -   About 50 years of research using primarily data from experimental installations (not representative of the landbase)
+
+-   Limited options – More in TASS (not yet available to everyone)
+
+-   When you run TIPSY, you get access to TIPSY help – very useful!! Lots of info there.
+
+-   **Inputs needed** (\* indicates these are optional)
+
+    -   Species composition
+    -   OAFs: The TASS and TIPSY yields will be too high because they assume no forest gaps, and low rates of pathogen/insect attacks.
+
+-   **Outputs obtained**
+
+    -   Volume per ha over age
+    -   MAI (m3/ha/year) over age
+
+    **VDYP**
+
+-   For “naturally-regenerated” stands (so-called “unmanaged” stands)
+
+-   Used in Timber Supply Analysis for unmanaged stands (i.e., naturally regenerated)
+
+-   Data used is more representative of the land base (not simple random sampling, but more representative)
+
+-   Prorates yields of pure species stands to get mixed species (as does TASS)
+
+-   **Inputs needed**
+
+    -   Species composition
+    -   BEC zone
+    -   Site productivity: Site index OR site height + age (SI calculated)
+    -   Density
+
+-   **Outputs obtained**
+
+    -   Volume per ha over age
+
+    -   MAI (m3/ha/year) over age
+
+        **TASS**
+
+-   Tree-level distance dependent model developed for managed stands
+
+-   Is the “engine” behind TIPSY database
+
+-   New version coming out soon (beta-testing right now) that will be available to more users
+
+-   Grows each tree crown and then the stem from this crown growth
+
+-   Competition depends on overlap of crowns
+
+-   50 years of research
+
+    **SORTIEBC**
+
+-   Tree-level distance dependent model that is considered a “hybrid” model since competition is based on light interception by crowns
+
+-   Limited support by BC MFLNRO right now
+
+-   SORTIE was originally developed by Canham in the USA.
+
+    **PROGNOSIS BC**
+
+-   Tree-level, distance independent model for mixed-species stands (managed or natural)
+
+-   Is the GY model behind the FVS system (most locations, not all) that has been adopted for use throughout the USA.
+
+-   Not supported by BC MFLNRO right now (“moth-balled”)
+
+-   Original Prognosis model was developed by Stage (1973 publication)
+
+    **Others**
+
+-   Forsyte, Forsee, Fortoon: Developed by Kimmins, professor emeritus at UBC. A hybrid model. Zelig: GAP model MGM: Developed for mixed species stands at the University of Alberta by Titus
+
+-   *every province has its own collection (e.g. PROGNOSIS Ontario, GYPSY (Alberta), etc.)* :::
+
+To become familiar with how VDYP and TIPSY can be used to forecast the growth and yield of stands, you will forecast three polygons from MKRF. You will use the VRI forest inventory, layer 1 attributes, as inputs to VDYP. This links the VDYP model to forest inventory information, which is what happens for “unmanaged” stands in timber supply analyses. You will then simulate harvests of these stands and forecast future growth and yield post-harvest using TIPSY.
+
+------------------------------------------------------------------------
+
+## Learning Objectives {.unnumbered}
+
+-   Understand the application of TIPSY and VDYP on the landbase
+
+-   Utilize TIPSY and VDYP to better understand forecasting for management decisions.
+
+------------------------------------------------------------------------
+
+## Task 1 VDYP: Stand-level Yield Forecasts using VRI as Inputs {.unnumbered}
+
+You looked at the 2014 VRI forest cover for MKRF in FRST 556, Ex.1 and 2. Using these data, all stands where western redcedar (*Thuja plicata*) was species with the largest percent were selected using QGIS. The attributes were exported as a .csv file, which was sorted, attributes were trimmed (i.e., some attributes were removed), and then the results were saved as CW dominated polygons trimmed.xlsx. Three of these stands in the northwestern part of MKRF were selected as stands of interest (CW dominated three polygons trimmed.xlsx). A few of the attributes of these polygons are shown in @tbl-polys, and an image of the location of these stands is shown in Figure 1
+
+| LY_ID | LBL_SPECIS | EST_SI_SPC | EST_SI (m) | CR_CLOSURE (%) | Shape_Ar (in ha) |
+|-------|------------|------------|------------|----------------|------------------|
+| 611   | CwHw(Fd)   | CW         | 20         | 65             | 11.1             |
+| 621   | CwHw(Fd)   | CW         | 21         | 65             | 2.1              |
+| 622   | CwHw(Fd)   | CW         | 18         | 70             | 7.1              |
+
+: Table 1. Three polygons selected from the western redcedar dominated stands of MKRF (Data Source: VRI 2014 forest cover map, layer 1). {#tbl-polys}
+
+::: {.callout-note collapse="true"}
+## Table Notes
+
+• POLY_ID is the ID for the polygon: • LBL_SPECIS shows the species from the highest to lowest percent (species in brackets have very low percentages) • EXT_SI_SPC is the species used for the site index reported; EST_SI is the site index for the stand in m; • CR_CLOSURE is the percent of the ground covered by trees; and • Shape_Area is reported in m2 by QGIS (and in ARCGIS software), but these have been converted to ha (This may be less than POLY_AREA in the VRI data, since the polygon may extend outside of the MKRF boundary).
+:::
+
+![Figure 1. Map of three selected (in green) western redcedar dominated polygons of MKRF. (Data Source: VRI 2014 forest cover map, layer 1).](images/clipboard-1804548772.png)
+
+In the CW dominated three polygons **trimmed.xlsx** file, you will also find the species percentages for these three selected polygons, and other attributes that you may need as inputs to VDYP to forecast this stand. Using VDYP, forecast these three stands from 0 to 250 years total age at 10-year intervals. You will get a yield a yield trajectory for each attribute in each of three stands (i.e., total volume per ha, merchantable volume per ha, stems per ha, etc. over time).
+
+1.  To get you started, first do the example stand in the Quick Intro to VDYP7.pdf (or .docx) file to get the yield trajectory, export these to EXCEL, trim off any labels, and then graphs the trajectories.
+
+2.  Use similar steps to get forecasts for each of these three stands, and export growth and yield table to an EXCEL file. Include merchantable volume (12.5 + cm DBH) in your outputs, as well as the MAI’s for total and merchantable volume. (See POLYGON1 2020 VDYP trimmed.xlsx as an example of VDYP outputs for a stand).
+
+3.  Using these growth and yield outputs, answer the questions posed and put these answers in your submission
+
+### Question 1 (VDYP Questions) {.unumbered}
+
+1.  Graph the total volume per ha (m^3^/ha) over total age (years) for each stand.  Which stand appears to be the most productive? Explain your answer. 
+2.  Graph the total volume mean annual increment (MAI or m.a.i., m^3^/ha/year) over total age for each of these three stands.   What is the biological rotation age for each stand?
+
+![Figure 2. Example of the total volume per ha and MAI for three selected stands.](images/clipboard-1872295870.png){fig-align="center"}
+
+3.  Repeat #2, but this time use the merchantable volume per ha (i.e., all trees 12.5 cm + DBH).   Are the biological rotation ages different than using the total volume per ha?
+4.  For each stand, what is the merchantable volume per ha (12.5 cm + DBH) at the biological rotation age (i.e., at the maximum m.a.i. for this volume)?  What is the average tree size in terms of average height (here Lorey’s height) and average DBH (here Quadratic Mean DBH)?
+5.  For each stand, what is current, estimated merchantable volume (12.5 cm + DBH) for the entire stand? HINT: First, determine the stand age as of 2014 using the VRI polygon attributes, and adjust this age to current year (2024) Then, look up the merchantable volume per ha (12.5 cm+ DBH) for that stand age. Finally, determine the current merchantable volume for the entire stand.
+6.  Based on the information you now have, would you recommend that any of these stands be harvested in the next 10 years or not? Explain your answer.
+
+------------------------------------------------------------------------
+
+## Task 2 - Forecasting Using TIPSY
+
+If these stands were harvested, we would need to forecast the stands again post-harvest. This is less complicated if stands were clearcut (i.e., called a *regeneration cut* or *clearfelling* in some places in the world), than if the stands were partially harvested.  We will assume that each of these stands was clearcut and you want to project the stands after harvest.  Following harvest:
+
+-   We could assume that the stands will naturally follow the [same trajectory]{.underline} as prior to harvest, meaning that they will start again at total age = 0 and follow the VDYP trajectories you created in Part I. 
+
+-   Alternatively, we could plant the pre-harvest dominant species or a different species, control the planting density, and forecast each stand using this management regime. We would then forecast the stand using TIPSY.
+
+Here, we will assume that [**you will plant 1600 stems/ha of Coastal Douglas-fir following harvest**]{.underline}. For each stand, show the [**forecast trajectories from 0 to 150 years by 10-year intervals**,]{.underline} as you did previously for the existing stand using VDYP, but this time using TIPSY for “managed” stands.  You will need to use some of the VRI information from the old stand that was there prior to harvest in doing the trajectory (e.g., Site Index).  Before you do these stand forecasts, [**do the forecast for the example stand**]{.underline} in the **Quick Guide to Using TIPSY 4.4.docx (**or pdf).
+
+### Question 2 (TIPSY Questions) {.unumbered}
+
+Using EXCEL and the outputs from your VDYP and TIPSY forecasts:
+
+1.  For the post-harvest plan, 1600 stems/ha was used. What is the spacing between the trees (m) assuming square spacing? Show your calculations.
+2.  Coastal Douglas-fir (FD) was used as the species to be planted post-harvest, whereas CW was the main species in the original stands at the time of the VRI inventory (Reference year: 1999). Since the Site Index was for CW not for FD, is the TIPSY forecast reliable? Explain briefly, considering the ecology of these three species in CWH.
+3.  Graph the total volume per ha (m^3^/ha) over total age (years) for the post-harvest TIPSY forecast versus the VDYP forecast for each of these stands (NOTE: The TIPSY forecast will be for 0 to 150 years only).  Compare these trajectories, and explain why they are different using principles of stand and tree growth for the existing stand versus the post-harvest planted stand.
+4.  Is the cost of planting justified? Briefly discuss under what circumstances this cost would be justified for these three stands.
+
+------------------------------------------------------------------------
+
+## Lab Questions & Deliverables {.unnumbered}
+
+-   [ ] Complete answers VDYP Questions
+-   [ ] Complete answers for TIPSY questions
+-   [ ] *all graphs and tables have captions and proper units*
+
+## Summary {.unnumbered}

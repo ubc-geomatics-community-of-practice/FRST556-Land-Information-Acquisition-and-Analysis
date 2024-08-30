@@ -1,0 +1,32 @@
+{
+  "index.qmd": {
+    "index.html": "70560d34"
+  },
+  "Course Data Description.qmd": {
+    "Course Data Description.html": "f2723ebd"
+  },
+  "01-Introduction to Forestry Datasets in QGIS.qmd": {
+    "01-Introduction to Forestry Datasets in QGIS.html": "63c84c44"
+  },
+  "02-VRI Forest Cover and Digital Imagery.qmd": {
+    "02-VRI Forest Cover and Digital Imagery.html": "8377fee9"
+  },
+  "03-Simple Sampling Design.qmd": {
+    "03-Simple Sampling Design.html": "6780eb7e"
+  },
+  "04-Compilation of Fixed Area Plots to a Stand Level.qmd": {
+    "04-Compilation of Fixed Area Plots to a Stand Level.html": "72d851db"
+  },
+  "05 - Volume, Biomass, and Taper Models.qmd": {
+    "05 - Volume, Biomass, and Taper Models.html": "59dbf2f9"
+  },
+  "06- VDYP & TIPSY for Forecasting Inventory Records.qmd": {
+    "06- VDYP & TIPSY for Forecasting Inventory Records.html": "72a03669"
+  },
+  "07 - Site Productivity And Density Measures.qmd": {
+    "07 - Site Productivity And Density Measures.html": "101fec71"
+  },
+  "08 - BC Forest Inventory Variables.qmd": {
+    "08 - BC Forest Inventory Variables.html": "13eb34d4"
+  }
+}

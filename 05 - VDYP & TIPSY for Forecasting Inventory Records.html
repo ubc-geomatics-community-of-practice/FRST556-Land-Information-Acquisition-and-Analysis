@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.310">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sarah Smith-Tripp">
+
+<title>06 - VDYP &amp; TIPSY for Forecasting Inventory Records</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/clipboard/clipboard.min.js"></script>
+<script src="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/quarto-html/quarto.js"></script>
+<script src="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/quarto-html/popper.min.js"></script>
+<script src="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/quarto-html/anchor.min.js"></script>
+<link href="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="05 - VDYP &amp; TIPSY for Forecasting Inventory Records_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">06 - VDYP &amp; TIPSY for Forecasting Inventory Records</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sarah Smith-Tripp </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="lab-overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="lab-overview">Lab Overview</h2>
+<p>For timber supply (and other forest-level analyses), forecasts of each stand (or aggregates of similar stands) are needed to evaluate different management scenarios. For these analyses, yield tables for each stand type and management regime are needed to make these forecasts. In BC, VDYP is used for “unmanaged” stands and TIPSY is used for “managed” stands. There are other models (e.g., PrognosisBC) also available for use by BC forest professionals. :::{.callout-note collapse=‘true’} ## Growth &amp; Yield Models in BC</p>
+<p><strong>TIPSY</strong></p>
+<ul>
+<li><p>For managed stands</p></li>
+<li><p>Used in Timber Supply Analysis for managed stands (i.e., post harvest)</p></li>
+<li><p>Can also be used for “silvicultural gaming”</p></li>
+<li><p>Prorates pure species stand yields to get mixed species stand yields (as does VDYP)</p></li>
+<li><p>Can add silvicultural treatments</p></li>
+<li><p>Look up forecasts from a database using the input variables you supply</p>
+<ul>
+<li>Where did this database come from? Run TASS -&gt; get yield tables and other things -&gt; add to TIPSY’s database -&gt; now ready to use in TIPSY - Where is TASS from?</li>
+<li>About 50 years of research using primarily data from experimental installations (not representative of the landbase)</li>
+</ul></li>
+<li><p>Limited options – More in TASS (not yet available to everyone)</p></li>
+<li><p>When you run TIPSY, you get access to TIPSY help – very useful!! Lots of info there.</p></li>
+<li><p><strong>Inputs needed</strong> (* indicates these are optional)</p>
+<ul>
+<li>Species composition</li>
+<li>OAFs: The TASS and TIPSY yields will be too high because they assume no forest gaps, and low rates of pathogen/insect attacks.</li>
+</ul></li>
+<li><p><strong>Outputs obtained</strong></p>
+<ul>
+<li>Volume per ha over age</li>
+<li>MAI (m3/ha/year) over age</li>
+</ul>
+<p><strong>VDYP</strong></p></li>
+<li><p>For “naturally-regenerated” stands (so-called “unmanaged” stands)</p></li>
+<li><p>Used in Timber Supply Analysis for unmanaged stands (i.e., naturally regenerated)</p></li>
+<li><p>Data used is more representative of the land base (not simple random sampling, but more representative)</p></li>
+<li><p>Prorates yields of pure species stands to get mixed species (as does TASS)</p></li>
+<li><p><strong>Inputs needed</strong></p>
+<ul>
+<li>Species composition</li>
+<li>BEC zone</li>
+<li>Site productivity: Site index OR site height + age (SI calculated)</li>
+<li>Density</li>
+</ul></li>
+<li><p><strong>Outputs obtained</strong></p>
+<ul>
+<li><p>Volume per ha over age</p></li>
+<li><p>MAI (m3/ha/year) over age</p>
+<p><strong>TASS</strong></p></li>
+</ul></li>
+<li><p>Tree-level distance dependent model developed for managed stands</p></li>
+<li><p>Is the “engine” behind TIPSY database</p></li>
+<li><p>New version coming out soon (beta-testing right now) that will be available to more users</p></li>
+<li><p>Grows each tree crown and then the stem from this crown growth</p></li>
+<li><p>Competition depends on overlap of crowns</p></li>
+<li><p>50 years of research</p>
+<p><strong>SORTIEBC</strong></p></li>
+<li><p>Tree-level distance dependent model that is considered a “hybrid” model since competition is based on light interception by crowns</p></li>
+<li><p>Limited support by BC MFLNRO right now</p></li>
+<li><p>SORTIE was originally developed by Canham in the USA.</p>
+<p><strong>PROGNOSIS BC</strong></p></li>
+<li><p>Tree-level, distance independent model for mixed-species stands (managed or natural)</p></li>
+<li><p>Is the GY model behind the FVS system (most locations, not all) that has been adopted for use throughout the USA.</p></li>
+<li><p>Not supported by BC MFLNRO right now (“moth-balled”)</p></li>
+<li><p>Original Prognosis model was developed by Stage (1973 publication)</p>
+<p><strong>Others</strong></p></li>
+<li><p>Forsyte, Forsee, Fortoon: Developed by Kimmins, professor emeritus at UBC. A hybrid model. Zelig: GAP model MGM: Developed for mixed species stands at the University of Alberta by Titus</p></li>
+<li><p><em>every province has its own collection (e.g.&nbsp;PROGNOSIS Ontario, GYPSY (Alberta), etc.)</em> :::</p></li>
+</ul>
+<p>To become familiar with how VDYP and TIPSY can be used to forecast the growth and yield of stands, you will forecast three polygons from MKRF. You will use the VRI forest inventory, layer 1 attributes, as inputs to VDYP. This links the VDYP model to forest inventory information, which is what happens for “unmanaged” stands in timber supply analyses. You will then simulate harvests of these stands and forecast future growth and yield post-harvest using TIPSY.</p>
+<hr>
+</section>
+<section id="learning-objectives" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<ul>
+<li><p>Understand the application of TIPSY and VDYP on the landbase</p></li>
+<li><p>Utilize TIPSY and VDYP to better understand forecasting for management decisions.</p></li>
+</ul>
+<hr>
+</section>
+<section id="task-1-vdyp-stand-level-yield-forecasts-using-vri-as-inputs" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="task-1-vdyp-stand-level-yield-forecasts-using-vri-as-inputs">Task 1 VDYP: Stand-level Yield Forecasts using VRI as Inputs</h2>
+<p>You looked at the 2014 VRI forest cover for MKRF in FRST 556, Ex.1 and 2. Using these data, all stands where western redcedar (<em>Thuja plicata</em>) was species with the largest percent were selected using QGIS. The attributes were exported as a .csv file, which was sorted, attributes were trimmed (i.e., some attributes were removed), and then the results were saved as CW dominated polygons trimmed.xlsx. Three of these stands in the northwestern part of MKRF were selected as stands of interest (CW dominated three polygons trimmed.xlsx). A few of the attributes of these polygons are shown in <a href="#tbl-polys">Table&nbsp;1</a>, and an image of the location of these stands is shown in Figure 1</p>
+<div id="tbl-polys" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1: Table 1. Three polygons selected from the western redcedar dominated stands of MKRF (Data Source: VRI 2014 forest cover map, layer 1).</caption>
+<colgroup>
+<col style="width: 9%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 20%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>LY_ID</th>
+<th>LBL_SPECIS</th>
+<th>EST_SI_SPC</th>
+<th>EST_SI (m)</th>
+<th>CR_CLOSURE (%)</th>
+<th>Shape_Ar (in ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>611</td>
+<td>CwHw(Fd)</td>
+<td>CW</td>
+<td>20</td>
+<td>65</td>
+<td>11.1</td>
+</tr>
+<tr class="even">
+<td>621</td>
+<td>CwHw(Fd)</td>
+<td>CW</td>
+<td>21</td>
+<td>65</td>
+<td>2.1</td>
+</tr>
+<tr class="odd">
+<td>622</td>
+<td>CwHw(Fd)</td>
+<td>CW</td>
+<td>18</td>
+<td>70</td>
+<td>7.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Table Notes
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>• POLY_ID is the ID for the polygon: • LBL_SPECIS shows the species from the highest to lowest percent (species in brackets have very low percentages) • EXT_SI_SPC is the species used for the site index reported; EST_SI is the site index for the stand in m; • CR_CLOSURE is the percent of the ground covered by trees; and • Shape_Area is reported in m2 by QGIS (and in ARCGIS software), but these have been converted to ha (This may be less than POLY_AREA in the VRI data, since the polygon may extend outside of the MKRF boundary).</p>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1804548772.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure 1. Map of three selected (in green) western redcedar dominated polygons of MKRF. (Data Source: VRI 2014 forest cover map, layer 1).</figcaption><p></p>
+</figure>
+</div>
+<p>In the CW dominated three polygons <strong>trimmed.xlsx</strong> file, you will also find the species percentages for these three selected polygons, and other attributes that you may need as inputs to VDYP to forecast this stand. Using VDYP, forecast these three stands from 0 to 250 years total age at 10-year intervals. You will get a yield a yield trajectory for each attribute in each of three stands (i.e., total volume per ha, merchantable volume per ha, stems per ha, etc. over time).</p>
+<ol type="1">
+<li><p>To get you started, first do the example stand in the Quick Intro to VDYP7.pdf (or .docx) file to get the yield trajectory, export these to EXCEL, trim off any labels, and then graphs the trajectories.</p></li>
+<li><p>Use similar steps to get forecasts for each of these three stands, and export growth and yield table to an EXCEL file. Include merchantable volume (12.5 + cm DBH) in your outputs, as well as the MAI’s for total and merchantable volume. (See POLYGON1 2020 VDYP trimmed.xlsx as an example of VDYP outputs for a stand).</p></li>
+<li><p>Using these growth and yield outputs, answer the questions posed and put these answers in your submission</p></li>
+</ol>
+<section id="question-1-vdyp-questions" class="level3 unumbered">
+<h3 class="unumbered anchored" data-anchor-id="question-1-vdyp-questions">Question 1 (VDYP Questions)</h3>
+<ol type="1">
+<li>Graph the total volume per ha (m<sup>3</sup>/ha) over total age (years) for each stand.&nbsp; Which stand appears to be the most productive? Explain your answer.&nbsp;</li>
+<li>Graph the total volume mean annual increment (MAI or m.a.i., m<sup>3</sup>/ha/year) over total age for each of these three stands.&nbsp;&nbsp; What is the biological rotation age for each stand?</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/clipboard-1872295870.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure 2. Example of the total volume per ha and MAI for three selected stands.</figcaption><p></p>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>Repeat #2, but this time use the merchantable volume per ha (i.e., all trees 12.5 cm + DBH).&nbsp;&nbsp; Are the biological rotation ages different than using the total volume per ha?</li>
+<li>For each stand, what is the merchantable volume per ha (12.5 cm + DBH) at the biological rotation age (i.e., at the maximum m.a.i. for this volume)?&nbsp; What is the average tree size in terms of average height (here Lorey’s height) and average DBH (here Quadratic Mean DBH)?</li>
+<li>For each stand, what is current, estimated merchantable volume (12.5 cm + DBH) for the entire stand? HINT: First, determine the stand age as of 2014 using the VRI polygon attributes, and adjust this age to current year (2024) Then, look up the merchantable volume per ha (12.5 cm+ DBH) for that stand age. Finally, determine the current merchantable volume for the entire stand.</li>
+<li>Based on the information you now have, would you recommend that any of these stands be harvested in the next 10 years or not? Explain your answer.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="task-2---forecasting-using-tipsy" class="level2">
+<h2 class="anchored" data-anchor-id="task-2---forecasting-using-tipsy">Task 2 - Forecasting Using TIPSY</h2>
+<p>If these stands were harvested, we would need to forecast the stands again post-harvest. This is less complicated if stands were clearcut (i.e., called a <em>regeneration cut</em> or <em>clearfelling</em> in some places in the world), than if the stands were partially harvested.&nbsp; We will assume that each of these stands was clearcut and you want to project the stands after harvest.&nbsp; Following harvest:</p>
+<ul>
+<li><p>We could assume that the stands will naturally follow the <u>same trajectory</u> as prior to harvest, meaning that they will start again at total age = 0 and follow the VDYP trajectories you created in Part I.&nbsp;</p></li>
+<li><p>Alternatively, we could plant the pre-harvest dominant species or a different species, control the planting density, and forecast each stand using this management regime. We would then forecast the stand using TIPSY.</p></li>
+</ul>
+<p>Here, we will assume that <u><strong>you will plant 1600 stems/ha of Coastal Douglas-fir following harvest</strong></u>. For each stand, show the <u><strong>forecast trajectories from 0 to 150 years by 10-year intervals</strong>,</u> as you did previously for the existing stand using VDYP, but this time using TIPSY for “managed” stands.&nbsp; You will need to use some of the VRI information from the old stand that was there prior to harvest in doing the trajectory (e.g., Site Index).&nbsp; Before you do these stand forecasts, <u><strong>do the forecast for the example stand</strong></u> in the <strong>Quick Guide to Using TIPSY 4.4.docx (</strong>or pdf).</p>
+<section id="question-2-tipsy-questions" class="level3 unumbered">
+<h3 class="unumbered anchored" data-anchor-id="question-2-tipsy-questions">Question 2 (TIPSY Questions)</h3>
+<p>Using EXCEL and the outputs from your VDYP and TIPSY forecasts:</p>
+<ol type="1">
+<li>For the post-harvest plan, 1600 stems/ha was used. What is the spacing between the trees (m) assuming square spacing? Show your calculations.</li>
+<li>Coastal Douglas-fir (FD) was used as the species to be planted post-harvest, whereas CW was the main species in the original stands at the time of the VRI inventory (Reference year: 1999). Since the Site Index was for CW not for FD, is the TIPSY forecast reliable? Explain briefly, considering the ecology of these three species in CWH.</li>
+<li>Graph the total volume per ha (m<sup>3</sup>/ha) over total age (years) for the post-harvest TIPSY forecast versus the VDYP forecast for each of these stands (NOTE: The TIPSY forecast will be for 0 to 150 years only).&nbsp; Compare these trajectories, and explain why they are different using principles of stand and tree growth for the existing stand versus the post-harvest planted stand.</li>
+<li>Is the cost of planting justified? Briefly discuss under what circumstances this cost would be justified for these three stands.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="lab-questions-deliverables" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="lab-questions-deliverables">Lab Questions &amp; Deliverables</h2>
+<ul class="task-list">
+<li><input type="checkbox">Complete answers VDYP Questions</li>
+<li><input type="checkbox">Complete answers for TIPSY questions</li>
+<li><input type="checkbox"><em>all graphs and tables have captions and proper units</em></li>
+</ul>
+</section>
+<section id="summary" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="summary">Summary</h2>
+<p>In this lab, we used a taper model to estimate total tree volume, merchantable volume, merchantable height, and merchantable length. We also compared the results of different volume models and engaged with scientific literature to find relevant models to calculate biomass and volume.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

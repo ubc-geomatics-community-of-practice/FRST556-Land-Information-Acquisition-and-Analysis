@@ -1,0 +1,134 @@
+---
+title: "Exercise 8: BC Forest Inventory Variables for Forest Management Problems"
+author: "Sarah Smith-Tripp"
+format: html
+editor: visual
+---
+
+## Background & Overview {.unnumbered}
+
+Every forest management problem requires information.  For problems involving very large forestland areas, often existing data sources are used to derive the data products needed (e.g., maps, summarized tables and graphs, etc.). Your [group of four or five]{.underline} persons will focus on one such problem and begin the process of deciding what information is needed, what data are readily available, and how these data would be used in an analysis process to derive the data products needed..
+
+------------------------------------------------------------------------
+
+## Learning Objectives {.unnumbered}
+
+-   To better understand what data are needed for forest management problems and where this data might be found using BC data as an example.
+
+-   To better understand how forest inventory data forms a basis for all forest management and conservation problems using BC data as an example.
+
+------------------------------------------------------------------------
+
+## Assignment Introduction {.unnumbered}
+
+You will be assigned one of the five group projects described in @sec-problems
+
+Using the information provided for the project, write up a report describing the following content (see @sec-turnin for details)
+
+-   **Objective:** Write a clear statement about the objective(s) for the project. What? Where? Why?
+
+-   **Criteria:** Describe the criteria you will use to assess which land areas might meet the objective(s).  For each of these criteria, explain why it is needed to meet the objective(s).
+
+-   **Data Needed:** In an EXCEL file:
+
+    -   List the map layers that you will need to find the land areas that fulfill your criteria. For each of these, provide a short description (**what**, **where**, **when** (i.e., what date)), and a source of these data (**who**). Be as specific as possible including a website for the data if the data are publicly available, or a contact agency, contact person, and cost if the data are not publicly available. Also, state **why** these data are needed for one or more of your criteria.
+
+    -   List the remotely sensed data that you will need to find the land areas that fulfill your criteria. For each of these, provide a short description (**what**, **where**, **when** (i.e., what date)), and a source of these data (**who**). Be as specific as possible including a website for the data if the data are publicly available, or a contact agency, contact person, and cost if the data are not publicly available. Also, state **why** these data are needed for one or more of your criteria.
+
+    -   Will you need any ground-based data? If this is essential, then, for each of these, provide a short description (**what, where, when**), and a source of these data (**who**). Be as specific as possible or a contact agency, contact person, and cost if the data are not publicly available. Also, state **why** these data are needed for one or more of your criteria.
+
+-   **Workflow**: Describe the general workflow steps you would need to follow. [The workflow should follow a logical flow of steps used to analyze the data to meet the criteria]{.underline}.  For this, consider:
+
+    -   **What step should be done first**? Why? What data will be used for that step, and what will be done with the data?
+
+    -   **What will be done next**? Why? What data will be needed?
+
+------------------------------------------------------------------------
+
+## Forest Management Problems {#sec-problems .unnumbered}
+
+::: callout-note
+While these are all fictional, they are based on actual forest management projects
+:::
+
+**Group 1**
+
+A professional biologist’s group is concerned that high-school students in the greater Vancouver area have had little or no experience in natural areas.  They would like to provide a one-day workshop for 30 students that would focus on outdoor experiences as a pilot program, with the long-term objective of providing these workshops for 120 students per year.  For safety reasons, they plan to conduce the workshops in May when weather conditions might be better. They have obtained approval to conduct the workshops in the Mount Seymour Provincial Park <https://bcparks.ca/explore/parkpgs/mt_seymour>, just north of Vancouver. The students will have varying levels of abilities to walk in natural areas.  They have asked you to come up with a number of suitable areas within the park for activities of this workshop.
+
+::: callout-tip
+*Some things to consider: What areas should be avoided? (Will students be able to walk over steep terrain? Will there be areas with snow?) What other uses might be competing with this student group use? Then, what should the teachers highlight for this student group? What should students learn about the natural environment? Where would you find these opportunities within the Park?*
+:::
+
+**Group 2**
+
+The Emily Car School of Design has contacted the Mission Municipal Forest near Mission ([www.mission.ca/city-hall/departments/forestry](http://www.mission.ca/city-hall/departments/forestry)), BC about possibly supplying raw materials for creative wood designs. They are particularly interested in using hardwood materials. A number of the art and furniture pieces they would like to create are quite large, requiring bigger trees.  They are not able to pay a lot for the materials.  Also, they would like to have the materials in March next year.  The Director of Forestry for the Mission Municipal Forest (TFL26) asks you for some options to obtain 100 m^3^ of materials that might meet their needs.  You are asked to be particularly careful with the costs of obtaining the materials to keep costs down. At the same time, environmental concerns must be considered in any timber extractions, as well as any conflicts with other activities in this Forest. 
+
+::: callout-tip
+*Some things to consider: For this, first which hardwoods (literature)? Where are they? Are they large enough?  What about harvest and transport costs (Close to roads? )  Then, which areas to get 100 m^3^? What other activities might be competing with this request for materials? Environmental concerns?*
+:::
+
+**Group 3**
+
+Ducks Unlimited ([www.ducks.ca](http://www.ducks.ca) ) has obtained some interest from a private donor for sponsoring a bird habitat reservation area near Vancouver.  The Mayor of Mission hears about this and decides to make a “pitch” for a possible reservation of 30 ha within public lands near Mission, possibly within the Mission Community Forest ([www.mission.ca/city-hall/departments/forestry](http://www.mission.ca/city-hall/departments/forestry) or adjacent to it. You are asked to provide some options as to where this area should be located, as well as the reasons for this choice.  Since the interest was from Ducks Unlimited, there is particular interest in conserving water birds.
+
+::: callout-tip
+*Some things to consider: First, what do birds need (literature)? Shelter + food + nesting habitat? Hardwoods for nesting birds? Should these be near roads or not? Near water?*
+:::
+
+**Group 4**
+
+The fire return interval in the District of North Vancouver has been more than 100 years. However, with changes in climate, there are concerns that this may be changing to shorter intervals (<https://www.dnv.org/community-environment/community-wildfire-protection-plan> ) The District has obtained additional funds to reduce wildfire risks.  They would like to know where areas of higher fire risk might be, along with areas where fires might result in greater losses (timber, buildings, and other losses).  They expect to be able to reduce fire risk on 50 ha in the next year via selective (i.e., partial) harvest to reduce the amount of combustible materials. They have asked you to provide a few options as to which 50 ha they should target this year.  
+
+::: callout-tip
+*Some things to consider for the information bits needed: First, what is considered a lower fire hazard (literature?) – elevation? Near lakes/rivers? Then, should the 50 ha be all in one space – or spread out over the District? How might any negative perceptions by publics regarding these forest changes be ameliorated though area selection?*
+:::
+
+------------------------------------------------------------------------
+
+## Lab Questions & Deliverables {#sec-turnin .unnumbered}
+
+-   [ ] A Short report including
+
+    -   [ ] Introduction: Provide a description of the management problem that you are addressing as separate introduction section. Include the objective and the criteria you will use to meet the objectives. Correctly cite any references you used to support these criteria.
+
+    -   [ ] Data components: Provide an explanation of the data you would need for this problem, why these are needed, and the sources of the data. Create a well-formatted table to support the text. Correctly site any information you used to support your statements on data needed for this problem. Also, try not to repeat the information you have in the table, but rather summarize it into statements and refer to the information in the table. Remember that the table must have a table caption above the table.
+
+    -   [ ] Methods: Describe the general workflow that you will need to follow to create the data products you will need. Introduce the workflow first and then list the steps. *You might find that using a flowchart figure helpful.* Remember that a figure must have a figure caption below the figure and the text explaining the figure must appear before the figure appear. objective and the criteria you will use to meet the objectives. Correctly cite any references you used to support these criteria.
+
+    -   [ ] References Cited: Add in a carefully formatted references cited section for any supporting documents for statements you made on information needs. For this, please use the Author, Date format.
+
+-   **Key Grading Criteria**
+
+    -   [ ] Presentation & Clarity, 4 points maximum - For this, the considerations that will be used in assigning points out of 4 are: • The report includes all sections, is well-organized, and is well-written.
+
+        -   Tables and figures are correctly referenced and introduced in the text (rather than just appearing);
+
+        -   Any points listings are correctly introduced (example is this paragraph).
+
+        -   Figure captions are under the figure.
+
+        -   Table captions are above the table. • Figures and tables appear after the point in the text that they are first referenced
+
+        -   References cited in the text are correctly cited in the text and listed in the “References cited” section.
+
+    -   \[\] Content, 6 points maximum - For this, the considerations that will be used in assigning points out of 6 are:
+
+        -   the introduction to the problem is clearly stated, along with clearly stated objective(s), and criteria to be used in meeting these objective(s).
+
+        -   There is no critical criterion missing.
+
+        -   Any criteria that might be easily debated (e.g., why this species?) are supported with references.
+
+        -   The text associated with the EXCEL table explains an overview of what the reader will see in the table
+
+        -   Table created using EXCEL:
+
+            -   Each bit of information describes the data (what, where, when), why it is needed based on the criteria, and an associated source (who); and
+
+        -   There is no critical data source that is missing from the report. For example, the information on tree species may be critical for the management problem, and that was not included.
+
+        -   The flowchart of steps provides a clear indication of what data are to be used, why this step is needed, and how the data will be used. The steps must be in a logical order.
+
+## Summary {.unnumbered}
+
+This lab pulled together our learnings from the course to address a real forest management issue as a group. Congrats!
