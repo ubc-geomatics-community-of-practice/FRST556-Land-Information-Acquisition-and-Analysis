@@ -1,0 +1,416 @@
+---
+title: "Exercise 4: Compilation of Fixed-Area Plots to a Stand Level"
+format: html
+editor: visual
+---
+
+```{r echo=FALSE}
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["terrain-spatial-interpolation"]][["author"]]
+```
+
+Written by
+
+```{r results='asis', echo=FALSE}
+cat(author)
+```
+
+## Lab Overview {.unnumbered}
+
+This lab builds on our previous work to introduce more stand-level summaries as well as using forest data to summarize important forest attributes like volume and biomass. You will work with formulas, created from test data, to understand a forest-stand. Using your estimates you will produce a data summary for a landowner. You may work in groups for this lab, but each student must be able to run the code on their own computer.
+
+------------------------------------------------------------------------
+
+## Learning Objectives {.unnumbered}
+
+-   Practice analysis of fixed-area plots to obtain plot summaries.
+
+-   Use simple random sampling to summarize plot-level data to obtain a stand-level summary
+
+-   Summarize tree-level data to obtain plot-level stand and stock tables. Use this tree level data to obtain stand-level stock and stand tables
+
+## Problem Introduction {.unnumbered}
+
+**General Description**
+
+A landowner hires you to conduct a survey of a 30-ha forested parcel of land (BC Coast). In particular, the owner would like to know how much they could make on the carbon market if they kept this forest intact and sold the carbon credits. From reading several documents, you find out that: 1) about 50% of aboveground biomass is carbon; and 2) the rate for carbon credits is about \$65 CAD per C tonne. The owner would also like to know general information about the timber characteristics for general management purposes.
+
+------------------------------------------------------------------------
+
+## Key Formulas {.unnumbered}
+
+For today's data investigation we will use formulas created by the ministry to calculate volume and dry biomass for different tree species in British Columbia. Models for volume use Schumaker's volume function. The coefficients are described in the table below.
+
+\$\$ Volume(m\^3) = 10\^{(A +B(Log\_{10}(DBH(cm))) + C\*(Log\_{10}(Height(m))))}\$\$
+
+```{r}
+#| echo: false 
+#| warning: false
+#| tbl-cap: BC Ministry of Forest Volume Coefficients 
+set.seed(123)
+library(pacman)
+p_load(tidyverse, flextable, knitr)
+#main coefficients 
+tree_types  <- c('immature western red cedar', 'immature western hemlock', 'immature douglas fir', 'mature western red cedar', 'mature western hemlock', 'mature douglas fir', 'red alder', 'bitter cherry')
+
+# main coefficients 
+A <- c(4.139118, -4.41882, -4.319071, -4.103107, -4.3374,-4.348375, -4.431705,-4.431705)
+B <- c(1.716770,1.867780,1.813820,1.743240,1.783500,1.692440,1.778590,1.778590)
+C <- c(1.047420,1.099890,1.042420,0.981729,1.120230,1.181970,1.090770,1.090770) 
+# Reshape and mutate
+volume_df <- data.frame(tree_types, A, B, C, Type = 'BC\nTraditional') %>% 
+  arrange(Type) %>% mutate_if(is.numeric, .funs = round, digits =2)
+# Create a pretty flextable ## group by Type 
+kable(volume_df, col.names = c('Tree Types', 'A', 'B', 'C', 'Source'))
+# ft <- as_grouped_data(volume_df, groups = "Type") %>% 
+#   flextable(.) %>% 
+#   theme_vanilla() %>% # Merging tree_types column to create a visual grouping 
+#   set_header_labels(
+#     tree_types = "Tree Types",
+#     A = "A", B = "B", C = "C") %>% 
+#   autofit() %>% 
+#   set_caption("Volume Coefficients")
+# ft
+
+```
+
+Similarly, Biomass equations use the following formula:
+
+$$
+Biomass = Intercept+ Slope * DDH
+$$
+
+Where DDH is the diameter squared times the height of the tree. $$
+DDH = (DBH(cm)/100)*(DBH(cm)/100)*Height(m) 
+$$
+
+```{r}
+#| echo: false
+# biomass coefficients 
+#| tbl-cap: Biomass Coefficients sourced from Standish et al. 1985
+trees_types_biomass <- c('mature western red cedar', 'mature western hemlock', 'mature douglas fir', 'red alder', 'bitter cherry')
+int <- c(40.4, 29.8, 37.2, 4.8, 4.8)
+slope <- c(96.9, 155.8, 139.3, 206.5, 206.5)
+biomass_df <- data.frame(trees_types_biomass, int, slope) %>% mutate_if(is.numeric, .funs = round, digits = 2)
+kable(biomass_df, col.names = c('Tree Types', 'Intercepts', 'Slope'))
+# biomass_ft <- flextable(biomass_df) %>% 
+#   theme_vanilla() %>% 
+#   set_header_labels(
+#     trees_types_biomass = "Tree Types",
+#     int = "Intercept", slope = "Slope") %>% 
+#   autofit() %>% 
+#   set_caption("Biomass Coefficients")
+# biomass_ft
+```
+
+## Data Description {.unnumbered}
+
+You decide to use a systematic sampling approach to determine plot centres for *n*=4 plots. For each plot center, you establish a circular, fixed-area plot (r=11.27 m; 0.04 ha) aiming to sample all trees which are ≥ 2.0 cm DBH within this radius. Some plots had a lot of trees and thus a process of "Half Sweeps" was conducted, where a randomly chosen half of the 0.04 ha (or a slice) was selected and only trees in that half of the plot were recorded (i.e., each tree counts twice in the 0.04 ha plot OR the plot size was reduced to 0.02 ha).
+
+For each tree (DBH≥2.0 cm) in the plot (full or half plot), the species was recorded and the DBH (cm) was measured. On a subset of trees, the height (m) was measured in the field. For the remaining trees, the height was estimated in the office using existing height/DBH models (i.e., for each tree without height, the species-specific models developed for this area were used to estimate height from DBH).  For broken trees, the height to the break was measured in the field, and an estimate of the height that the tree might have been if not broken was also recorded in the field. A snapshot of these data are provided below.
+
+From these data, you determine the characteristics of the forest land and report these to the landowner, along with your estimate of potential carbon credits.
+
+```{r}
+#| echo: false
+## data 
+plot_data <- read.csv("Lab4_Plotdata.csv")
+plot_data %>% group_by(PlotNo) %>% 
+  summarise(number_trees = n(), 
+            plot_type = unique(Partial.)) %>% kable(., caption = "Description of four selected plots including # trees & plot type")
+
+```
+
+## Plot Level Analyses {.unnumbered}
+
+Following the example code below (using fake data!) use the *real* data included in your lab exercises to calculate the average tree size in terms of DBH, height and basal area per tree, total volume per tree, and biomass. Remember to report the measurements units for each of these metrics. The code below includes both a right and a wrong version. In your analysis, discuss which version you used and why. Additionally, there were some useful formulas created to analyse data in lab 3. We'll be working work this code for our analyses. Click the down-arrow to look at these functions
+
+```{r}
+#| warning: false 
+#| code-fold: true
+#| code-summary: "Useful Statistical Functions"
+set.seed(1234)
+# load packages 
+library(pacman)
+p_load(tidyverse, ggplot2, dplyr)
+## set up some useful functions 
+## variance around the maean 
+var_simple_random <- function(data){
+  #data = numeric vector of dataset
+  ybar <- mean(data, na.rm =T) ## calculate the mean
+  top_sum <- sum((data - ybar) ^ 2)
+  df <- length(data)
+  var_simple <- top_sum/ (df-1)
+  return(var_simple)
+}
+## standard deviation w and without replacement 
+sd_simple_random <- function(data, replacement = T, N_big = NULL) {
+  #data = numeric vector of dataset
+  #replacement = a logical value indicating whether sample is with or without replacement 
+  #N_big = an optional numeric value representing the total population size when sampling without replacement
+  ybar <- mean(data, na.rm = T) ## calculate the mean
+  top_sum <- sum((data - ybar) ^ 2)
+  df <- length(data)
+  var_simple <- top_sum / (df - 1)
+  if (replacement == F) { # replacement is NOT true
+    ## adjustment neded to control for the limited sampel
+    if (length(N_big) == 0) {
+      return('Total Possible Needed')
+    } else if (length(N_big) > 0) {
+      adj_fct <- (N_big - df) / N_big
+      sd_mean = (var_simple / df) * adj_fct
+      return(sd_mean)
+    }
+  }
+  else {
+    sd_mean = var_simple / df
+    return(sd_mean)
+  }
+}
+## confidence intervals for mean of population
+confident_interval <- function(x, alpha = 0.05){
+  #data = numeric vector of dataset
+  #alpha = confidence interval (default is 0.95)
+  n <- length(x)
+  mean_x <- mean(x, na.rm = T)
+  ## this is the sd of the mean 
+  se <- sd(x, na.rm =T)/sqrt(n)
+  t_value <- qt(1 - alpha/2, df = n - 1)
+  ## confidence ofthe mean of the population
+  ci <- mean_x + c(-1, 1) * t_value * se
+  return(ci)
+}
+new_sample_size <- function(Allowable_Error, 
+                            data,
+                            replacement = TRUE,
+                            N = 100) {
+  #Allowable error = error in decimal allowed in the new dataset 
+  #data = numeric vector of dataset
+  #replacement = a logical value indicating whether sample is with or without replacement 
+  #N_big = an optional numeric value representing the total population size when sampling without replacement
+  ## calculate confidence interval 
+  CI <- confident_interval(data)
+  
+  ## percent error 
+  PE <- (diff(CI) * 0.5) / mean(data) * 100
+  
+  ## calculate mean
+  mean_val <- mean(data)
+
+  #test_stat <- mean_val - 0.95 / (var(data)^0.5)
+  t_val <- qt(0.95, df = length(data)-1, lower.tail = T)
+  t_val
+  sd_ <- sd(data)
+  CV = (sd_ / mean_val) * 100 
+  if (replacement == FALSE) {
+    Q <- Allowable_Error^2 / (t_val^2 * CV^2)
+    n_out <- 1 / ((1 / N) + Q)
+    n_out
+    } else {
+    n_out <- (t_val^2 * CV^2)/ Allowable_Error^2
+  }
+  return(round(n_out))
+}
+```
+
+#### First we will calculate the tree level variables {.unnumbered}
+
+*Note this code also shows how to read in the real data*
+
+```{r}
+#| warning: false
+## read in our data 
+plot_data <- read.csv("Lab4_Plotdata.csv")
+## we are using fake data here 
+species_list <- unique(plot_data$Species)
+## species mapping 
+species_fullnames <- c('Cw'='western redcedar', 'Hw'='western hemlock', 'Fd'='douglas fir', 'Ra'='red alder', 'Bc'='bitter cherry')
+## convert species in the volume coefficients factor 
+## assuming all trees are mature 
+p_load(stringr)
+coeff_vol_bio_mat <- filter(volume_df, str_starts(tree_types, "mature") & Type ==
+                          'BC\nTraditional') %>% 
+  mutate(short_names = case_when(tree_types == 'mature western red cedar' ~ 'Cw',
+                                 tree_types == 'mature western hemlock' ~ 'Hw', 
+                                 tree_types == 'mature douglas fir' ~ 'Fd')) %>% 
+  left_join(biomass_df, by = c('tree_types' = 'trees_types_biomass'))
+
+## create a random list of species
+fake_data <- data.frame(Species = sample(species_list, 100, replace = TRUE), 
+                        DBH = rnorm(100, 30, 2),
+                        Height = rnorm(100, 25, 5),
+                        PlotNo = sample(1:4, 100, replace = TRUE),
+                        Partial = sample(c("Full", "Half"), 100, replace = TRUE),
+                        Treeno = seq(1, 100, by = 1))
+## using fake data and the volume coefficients and the species fullnames calculate the volume for each tree
+fake_data_calcs_tree <- fake_data %>%
+  #Join the volume coefficients onto the data frame 
+  left_join(coeff_vol_bio_mat, by = c("Species"="short_names")) %>% 
+  #Group by tree ID 
+  group_by(Treeno) %>%
+  mutate(BA = (sqrt(DBH/(2*100)) * pi), # basal area per tree
+         Vol =  (10^(A + (B*log10(DBH)) + (C*log10(Height)))),## volume per tree
+         biomass = int + (slope * ((DBH/100)^2) * Height)) #biomass per tree
+head(fake_data_calcs_tree)
+```
+
+#### Then we will calculate the per hectare variables for each tree {.unnumbered}
+
+```{r}
+#| warning: false
+#| code-summary: "Calculating per hectare variables"
+## option a 
+opt_A_pHa <- fake_data_calcs_tree %>% 
+  ## Add in plot adjustment
+  mutate(SPH = 1/0.04) %>% 
+  group_by(Treeno) %>% 
+  mutate(BA_pHa = BA * SPH, 
+         Vol_pHa = Vol * SPH, 
+         biomass_pHa = biomass * SPH) 
+# option b 
+opt_B_pHa <- fake_data_calcs_tree %>% 
+  ## Add in plot adjustment
+  mutate(SPH = ifelse(Partial == "Half", 1/0.02, 1/0.04)) %>% 
+  group_by(Treeno) %>% 
+  mutate(BA_pHa = BA, 
+         Vol_pHa = Vol, 
+         biomass_pHa = biomass)
+trees_pHa <- opt_B_pHa
+
+```
+
+#### Finally, we can calculate the plot and stand-level variables {.unnumbered}
+
+```{r}
+#| warning: false
+## option a
+opt_A_plot <- opt_A_pHa %>% 
+  ## Group by plot
+  group_by(PlotNo) %>% 
+  summarise(mean_DBH = mean(DBH, na.rm = T), 
+            mean_Height = mean(Height, na.rm = T), 
+            mean_BA = mean(BA, na.rm= T), 
+            mean_Vol = mean(Vol, na.rm =T), 
+            mean_biomass = mean(biomass, na.rm = T),
+            mean_BApHa = sum(BA_pHa, na.rm =T), 
+            mean_VolpHa = sum(Vol_pHa, na.rm = T),
+            mean_biomass_pHa = sum(biomass_pHa, na.rm = T)) %>% 
+  summarise_all(mean)
+## option b
+opt_B_plot <- ungroup(opt_B_pHa) %>% ## ungroup data to calculate stand level means 
+  mutate(Adjst = ifelse(Partial == "Half", 0.5, 1)) %>%
+  reframe(mean_DBH = mean(DBH, na.rm = T), 
+            mean_Height = mean(Height, na.rm = T), 
+            mean_BA = mean(BA, na.rm= T), 
+            mean_Vol = mean(Vol, na.rm =T), 
+            mean_biomass = mean(biomass, na.rm = T),
+            mean_BApHa = mean_DBH * SPH * Adjst, 
+            mean_VolHa = mean_Height * SPH * Adjst, 
+            mean_biomasspHa = mean_biomass * SPH * Adjst) %>% 
+  distinct()
+```
+
+### Question 1 {.unnumbered}
+
+In the the code chunks above which options correctly calculated: A. the tree-level per hectare variables? Why? B. the stand-level variables? Why?
+
+### Question 2 {.unnumbered}
+
+Using you answer to question 2 adjust the code below to also calculate confidence intervals for biomass per hectare.
+
+#### Calculating Confidence intervals for DBH and Mean Height {.unnumbered}
+
+```{r}
+#| warning: false
+## calculate the confidence intervals for the mean of the population
+## for the mean DBH
+adjust_confidence_func <- function(x, alpha, confident_interval) {
+  splitted <- str_split(confident_interval(x, alpha = alpha), ' ')
+  out <- paste0( round(as.numeric(splitted[[1]]), 2),'-', round(as.numeric(splitted[[2]]),2))
+}
+
+confidence_intervals <- trees_pHa %>% 
+  ## Group by plot 
+  group_by(PlotNo) %>% 
+  summarise(DBH_means = mean(DBH, na.rm = T),
+            Height_means = mean(Height, na.rm = T),
+            stems_per = ifelse(Partial == "Half", n()*2, n()) * (1/0.04), 
+            volume_pHa = sum(BA_pHa, na.rm = T)
+            ## Add values here to calculate by plot 
+            ## e.g.
+            #biomass_per = sum(biomass_pHa)
+            ) %>%
+  ungroup() %>% 
+  summarise(DBH_CI = adjust_confidence_func(DBH_means, 0.05, confident_interval),
+            mean_DBH = round(mean(DBH_means, na.rm = T), 2),
+            Height_CI = adjust_confidence_func(Height_means, 0.05, confident_interval),
+            mean_Height = round(mean(Height_means, na.rm = T),2),
+            volume_CI = adjust_confidence_func(volume_pHa, 0.05, confident_interval),
+            mean_volume = round(mean(volume_pHa, na.rm = T),2),
+            stems_CI = adjust_confidence_func(stems_per, 0.05, confident_interval),
+            mean_stems = round(mean(stems_per, na.rm = T), 2))
+  ## add values here to calculate for the stand-level 
+confidence_intervals %>% kable(., caption ="Confidence Intervals & mean values for DBH, Height, Volume, and Stems")
+```
+
+### Question 3 {.unnumbered}
+
+Calculate the estimated total volume and total biomass for the 30-ha area and a 95% confidence interval for each of these with measurement units
+
+```{r}
+mean_volume <- confidence_intervals$mean_volume * 30
+#mean_biomass <- confidence_intervals$mean_biomass * 30
+```
+
+### Question 4 {.unnumbered}
+
+What is the estimated carbon (tonnes) and estimated carbon credits (\$CAD) and 95% confidence intervals for the 30-ha area? *Remember: biomass estimates are in kg*
+
+### Question 5 {.unnumbered}
+
+Using your formatted data, create a table that summarizes the plot and stand-level variables by DBH class and species. In this instance, we will need to the group the data by both Plot & DBH class prior to summarizing the data. The code below shows this to the plot level. Adjust the code to also summarize the data to the stand level. See an example of plotting below:
+
+![](images/clipboard-894189215.png)
+
+```{r}
+#| warning: false
+## using our trees_pHa data
+# create DBH cutoffs every 10 cm
+plot_stock_table <- trees_pHa %>% 
+  mutate(DBH_class = cut(DBH, breaks = seq(0, 100, by = 10))) %>%
+  #Group by DBH, Species,  AND plot number (i.e grouping by plot prior to summarising)
+  group_by(PlotNo, DBH_class, Species) %>%
+  summarise(mean_DBH = mean(DBH, na.rm = T),
+            mean_VolpHa = sum(Vol_pHa, na.rm = T)) %>% 
+  ## Group by species and DBH class 
+  ## Drop plot level grouping
+  group_by(DBH_class, Species) 
+  ## add the stand level summary here
+
+## we can plot use this plot the data 
+# ggplot(plot_stock_table, aes(x = DBH_class, y = mean_VolpHa, fill = Species)) + 
+#   geom_bar(stat = "identity", position = "dodge") + 
+#   theme_minimal() + 
+#   labs(title = "Volume per Hectare by DBH Class and Species", 
+#        x = "DBH Class (cm)", y = "Volume per Hectare (m^3)")
+```
+
+## Reporting {.unnumbered}
+
+Prepare a short summary report for the landowner that includes the following:
+
+A.  An introduction to the report including the location of the survey, type of forest and size of the forest, along with the survey objectives.
+B.  A methods section indicating how the data were obtained (Sampling design? Spacing? Random start? Plot size? Map of plot centres? What was measured for each tree in each plot?
+C.  A results section providing a summary of the important information about this stand, using Q1 to Q4 to guide you on what to include in this section (What would you want your reader to know about the stand? Tree size? Volume perha and biomass per ha? Species composition?). Include tables to support your results. *Make sure to include captions and units for all tables and figures*
+D.  A clearly arranged appendix including your code and answers to the questions in this lab.
+
+------------------------------------------------------------------------
+
+## Lab Questions & Deliverables {.unnumbered}
+
+-   [ ] *Individuals* Complete answers for all 5 questions in the lab *including code when asked*
+-   [ ] *Group* A summary report for the landowner including an introduction, methods, results, and an appendix with code and answers to the questions in this lab.
+
+## Summary {.unnumbered}
+
+In this lab, we used R to calculate important plot and stand level attributes. We used these attributes to produce a summary report for a forest stand that will be given to a landowner. We also calculated confidence intervals for our estimates to provide a measure of uncertainty around our estimates.

@@ -1,0 +1,48 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Open Geomatics Community of Practice"
+  chapters: 
+    - index.qmd
+    - 01-Introduction to Forestry Datasets in QGIS.qmd
+    - 02-VRI Forest Cover and Digital Imagery.qmd
+    - 03-Simple Sampling Design.qmd
+    - 04-Compilation of Fixed Area Plots to a Stand Level.qmd
+    - 05 - Volume, Biomass, and Taper Models.qmd
+    - 06- VDYP & TIPSY for Forecasting Inventory Records.qmd
+    - 07 - Site Productivity And Density Measures.qmd
+    - 08 - BC Forest Inventory Variables.qmd
+    - Course Data Description.qmd
+  sidebar: 
+    style: docked
+    background: light
+  search: true
+  cover-image: cover.png
+  # repo-url: XX
+  # repo-actions: [edit]
+  downloads: [pdf, epub]
+  page-navigation: true
+
+
+github:
+  repo: https://github.com/ubc-geomatics-community-of-practice/GEM510-GIS-for-Forestry-and-Conservation.git
+
+clean:
+  - book.bib
+  - bookdown.bbl
+  - packages.bib
+
+format:
+  html:
+    split-by: chapter
+    embed-resources: true
+    downloads: docx
+  # pdf:
+  #   prefer-html: true
+  #   documentclass: book
+  #   latex-engine: xelatex
+  #   citation-package: natbib
+  docx:
+    prefer-html: false

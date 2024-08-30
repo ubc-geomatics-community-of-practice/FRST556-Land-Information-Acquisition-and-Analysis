@@ -1,0 +1,345 @@
+```{r}
+#| echo: false 
+yml_content <- yaml::read_yaml("chapterauthors.yml")
+author <- yml_content[["terrain-spatial-interpolation"]][["author"]]
+```
+
+# Exercise 3: Simple Sampling Designs {#terrain-spatial-interpolation}
+
+Written by
+
+```{r results='asis'}
+#| echo: false
+cat(author)
+```
+
+```{r}
+#| echo: false
+#| warning: false 
+set.seed(1234)
+library(pacman)
+p_load(tidyverse, ggplot2, dplyr)
+## set up some useful functions 
+## variance around the maean 
+var_simple_random <- function(data){
+  ybar <- mean(data, na.rm =T) ## calculate the mean
+  top_sum <- sum((data - ybar) ^ 2)
+  df <- length(data)
+  var_simple <- top_sum/ (df-1)
+  return(var_simple)
+}
+## fix this code
+sd_simple_random <- function(data, replacement = T, N_big = NULL) {
+  ybar <- mean(data, na.rm = T) ## calculate the mean
+  top_sum <- sum((data - ybar) ^ 2)
+  df <- length(data)
+  var_simple <- top_sum / (df - 1)
+  if (replacement == F) {
+    ## adjustment neded to control for the limited sampel
+    if (length(N_big) == 0) {
+      return('Total Possible Needed')
+    } else if (length(N_big) > 0) {
+      adj_fct <- (N_big - df) / N_big
+      sd_mean = (var_simple / df) * adj_fct
+      return(sd_mean)
+    }
+  }
+  else {
+    sd_mean = var_simple / df
+    return(sd_mean)
+  }
+}
+## confidence intervals for meean of population
+confident_interval <- function(x, alpha = 0.05){
+  n <- length(x)
+  mean_x <- mean(x)
+  ## this is the sd of the mean 
+  se <- sd(x)/sqrt(n)
+  t_value <- qt(1 - alpha/2, df = n - 1)
+  ## confidence ofthe mean of the population
+  ci <- mean_x + c(-1, 1) * t_value * se
+  return(ci)
+}
+new_sample_size <- function(Allowable_Error, 
+                            data,
+                            replacement = TRUE,
+                            N = 100) {
+  ## calculate confidence interval 
+  CI <- confident_interval(data)
+  
+  ## percent error 
+  PE <- (diff(CI) * 0.5) / mean(data) * 100
+  
+  ## calculate mean
+  mean_val <- mean(data)
+
+  #test_stat <- mean_val - 0.95 / (var(data)^0.5)
+  t_val <- qt(0.95, df = length(data)-1, lower.tail = T)
+  t_val
+  sd_ <- sd(data)
+  CV = (sd_ / mean_val) * 100 
+  if (replacement == FALSE) {
+    Q <- Allowable_Error^2 / (t_val^2 * CV^2)
+    n_out <- 1 / ((1 / N) + Q)
+    n_out
+    } else {
+    n_out <- (t_val^2 * CV^2)/ Allowable_Error^2
+  }
+  return(round(n_out))
+}
+```
+
+## Lab Overview {.unnumbered}
+
+This lab uses a "simulated" forest to practice simple random sampling, summarizing the data, and then using that information as we would in a real forest environment. We will use this sample data to estimate important forest metrics and confidence around our estimates.
+
+------------------------------------------------------------------------
+
+## Learning Objectives {.unnumbered}
+
+-   Estimate the population mean and the confidence intervals using simple random sampling
+
+-   Apply estimates + confidence intervals to answer management questions
+
+-   Apply a systematic sampling design to estimate population mean and confidence intervals
+
+-   Compare the cost and relative efficacy of different sampling regimes.
+
+::: callout-note
+Prior to completing this exercise go over the terminology and equations included the course lecture material. It is important to know what a *population* mean is and how we describe this using *estimators*
+:::
+
+## Data Overview {.unnumbered}
+
+**Simulated Forest Landscape**
+
+```{r}
+#| echo: false
+##| fig.height: 9  
+# Create a data frame with the grid coordinates and labels
+grid_data <- expand.grid(x =1:8, y = 1:14)
+
+# Assign labels in a zigzag pattern
+grid_data <- grid_data %>%
+  arrange(x, -y) 
+grid_data$plot_label <- seq(1, 112, by = 1)
+grid_data$plot_vol <- round(rnorm(112, 9.5, 2))
+
+# ggplot(grid_data, aes(x = x, y = y)) +
+#   geom_tile(color = "black", fill = "white") +  # Draw the grid
+#   geom_text(aes(label = plot_label), 
+#             size = 4, hjust = 0, vjust = 1, 
+#             nudge_x = -0.4, nudge_y = 0.4) +  # Add labels
+#   geom_text(aes(label = plot_vol), 
+#                 size = 2.5,hjust = 0, vjust = 1, 
+#             nudge_x = 0.2, nudge_y = -0.1, color  ='grey35') +
+#   scale_x_continuous(breaks = 1:14, minor_breaks = NULL) +
+#   scale_y_continuous(breaks = 1:8, minor_breaks = NULL) +
+#   theme_minimal() +
+#   theme(  theme(
+#     panel.grid = element_blank()), 
+#     axis.text  = element_blank()) + # Remove grid lines)) + 
+#     coord_fixed(1)
+```
+
+------------------------------------------------------------------------
+
+![Each square is a 14.14 m X 14.14 m plot (0.02 ha plot). Numbers on the top left-hand corners are plot numbers, whereas numbers on the bottom right-hand corner are volumes (m3/0.02 ha). North is at the top of the map](images/clipboard-333927722.png)
+
+## Task 1: Simple Random Sampling {.unnumbered}
+
+**Step 1**
+
+### Question 1 {.unnumbered}
+
+Using the map above select n=15 plots using simple random sampling without replacement. Explain how you used **simple random sampling replacement to select the data**. How did you choose random numbers?
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+## develop a sample 
+plot_sample <- sample(x = 1:112, size = 15, replace = F)
+```
+
+### Question 2 {.unnumbered}
+
+Calculate:
+
+1.  Mean volume per plot
+2.  The estimated plot-to-plot variance
+3.  The estimated variance of the mean (remember that this is sampling without replacement)
+4.  The estimated standard error of the mean
+5.  95% confidence interval for this mean.
+
+::: callout-note
+*You must should calculations and include measurement units in your responses. For your confidence interval calculation, shot is a range with the lower value first.*
+:::
+
+```{r}
+#| echo: false
+library(dplyr)  # Ensure dplyr is loaded for filter function
+
+## develop a sample 
+plot_sample <- filter(grid_data, plot_label %in% sample(x = 1:112, size = 15, replace = FALSE))
+mean_n <- mean(plot_sample$plot_vol, na.rm = TRUE)
+#var <- var(plot_sample$plot_vol)
+variance <- var_simple_random(plot_sample$plot_vol)
+
+## standard error of the mean 
+sd <- sd_simple_random(plot_sample$plot_vol, replacement = FALSE, N_big = 112)
+confident_intervals <- confident_interval(plot_sample$plot_vol)
+```
+
+### Question 3 {.unnumbered}
+
+Convert the estimated mean volume per plot and the associated confidence interval to an equivalent per hectare estimate (e.g. 200m3/ha with a confidence interval of (100 m3/ha)
+
+```{r}
+#| echo: false
+# convert using known area relationship 
+plot_areas <- 0.02 #ha
+mean_ha <- mean_n / plot_areas ## here our conversion factor is (1 ha / 0.2 ha)
+confident_intervals_ha <- confident_intervals / plot_areas
+```
+
+### Question 4 {.unnumbered}
+
+Based on the volume per ha values, where in BC might these data have come from? Consider (1) ecosystem type (2) time since disturbances. To provide context, a very productive old stand in the Boreal Forest of Canada could have up to 500 m^3^/ha (most are much less). A very productive old stand in the Temperate Rainforest of the western coast of Canada could have 1,500 m^3^/ha. Also, 1 m^3^ is about the size of a utility pole (e.g., telephone or electricity pole).
+
+### Question 5 {.unnumbered}
+
+How large is total plot area in hectares (you determined this in Activity 3 already)? Use this to expand the mean in m^3^/ha and the associated confidence interval to obtain the estimated total m^3^ volume for the land area and a 95% confidence interval for this estimate. Based on this confidence interval, would you say that there could be 1200 m^3^ of volume in this area?
+
+```{r}
+#| echo: false 
+plot_areas <- 0.02 #ha
+nplots <- 112 
+total_area <- plot_areas * nplots
+total_mean <- mean_ha * total_area
+total_confident_intervals <- confident_intervals_ha * total_area
+```
+
+### Question 6 {.unnumbered}
+
+Calculate the Percent Error achieved for your survey. Did you achieve the desired percent error of  + or – 15% of the mean with 95% probability? NOTE: This is the standard for operational cruising in BC for scale-based sales (i.e., billing is based on scaled logs not on standing estimated cruise volumes).
+
+```{r}
+#| echo: false 
+percent_error <- (diff(confident_intervals) * 0.5) / mean_n * 100
+```
+
+------------------------------------------------------------------------
+
+## Task 2: Systematic Random Sampling {.unnumbered}
+
+For the following questions imagine a forester is planning a survey with the with the following specifications:
+
+A.  Intensity (*I*) = 0.02 (i.e., 2 %)
+
+B.  Forest land area (*A*) = 100 ha (1000 m X 1000 m; 1 ha = 10,000 m^2^)
+
+C.  Size of plot (*a*)= 0.02 ha (i.e., 14.14 X 14.14 square plot)
+
+### Question 7 {.unnumbered}
+
+A.  The area of the all of the plots of that will be needed for this forester’s survey using this intensity (A*p*); and
+
+B.  The number of samples (*n*) required for this desired sampling intensity, given the specified plot size.
+
+```{r}
+#| echo: false 
+## claculate the intensity 
+I <- 0.02
+A <- 100
+a <- 0.02
+Ap = A * I
+n <- Ap / a
+```
+
+### Question 8 {.unnumbered}
+
+Given that the length between plot centres (*B*) is fixed at 40 m, what is the length between lines (*L*)? **NOTE:** In practice, we would round down to the nearest 5 m to lay this out in the field. For example, if the answer was 103 m, we would use 40 m by 100 m spacing (not 105 m and not 103 m spacing), since forest land areas are often irregular in shape and this would “pull in” the systematic sampling grid to hopefully get enough plots.
+
+What would the spacing be, if this square spacing between plot centres was used instead? Again, in practice, we would round this answer down to the nearest 5 m to lay this out in the field.
+
+Which of these two options would you choose to use and why?
+
+```{r}
+#| echo: false 
+## claculate the intensity 
+A <- 100 * 10000 ## convert to m^2
+B <- 40
+n <- 100
+rect_spacing <- A/(n * B)
+square_spacing <- sqrt(A/n)
+```
+
+### Question 9 {.unnumbered}
+
+Using the square spacing calculated in 2b and the plot size, select random co-ordinates for you first plot centre in the first “grid” of your systematic survey. Show all calculations you used to get the random co-ordinates and to make sure that the plot will fit within the first “grid square” of your systematic survey given these random co-ordinates and the plot dimensions.
+
+```{r}
+#| echo: false
+#| output: false 
+## calculate the intensity 
+# spacing is 100 x 100 so we need to make sure that the plot fits within the grid
+x <- runif(1, 0, 100-14.14)
+y <- runif(1, 0, 100-14.14)
+## check if the plot fits within the grid
+# if (x + 14.14 < 100 & y + 14.14 < 100) {
+#   print('Plot fits within the grid')
+# } else {
+#   print('Plot does not fit within the grid')
+# }
+```
+
+### Question 10 {.unnumbered}
+
+Given a fixed project cost of \$5,000 (i.e., truck rental and other equipment) and a per day cost of \$1,000 for a 2-person crew with a production rate of eight plots per day:
+
+A.  How long would the survey take?
+
+B.  What would the cost of this survey be?
+
+```{r}
+#| echo: false 
+#| output: false
+## calculate the intensity 
+total_days  = n / 8
+total_cost = 5000 + (total_days * 1000)
+```
+
+### Question 11 {.unnumbered}
+
+if the budget was set at \$10,000:
+
+A.  How many plots could you have measured using the cost estimates in #10?
+
+B.  What would the sampling intensity be for this fixed budget?
+
+C.  Would this sampling intensity be more or less than the sampling intensity used in the sample plan (i.e., planned for 2%)?
+
+```{r}
+#| echo: false
+#| output: false
+## calculate n plots when cost is 10000
+c <- 10000 ## set maximum
+c_day <- 1000 ## cost/day
+A <- 100 ## area 
+a <- 0.02 ## plot area 
+n_plots <- ((c - 5000) /c_day) * 8 
+## resolve equations for I 
+#(n_plots * a) / A
+```
+
+------------------------------------------------------------------------
+
+## Lab Questions & Deliverables {.unnumbered}
+
+-   [ ] Complete answers for all 11 following questions:
+    -   [ ] Questions should show all work including calculations
+    -   [ ] If you used code, make sure to include the code you used to answer the question.
+
+## Summary {.unnumbered}
+
+In this lab, we practiced the calculations of important summary statistics from a random sampling design. We also learned and applied our investigation to look at sampling intensity in systematic random sampling.
