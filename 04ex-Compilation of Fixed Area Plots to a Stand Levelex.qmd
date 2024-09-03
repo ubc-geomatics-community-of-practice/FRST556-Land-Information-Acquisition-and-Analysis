@@ -1,0 +1,152 @@
+---
+title: "Exercise 4: Compilation of Fixed-Area Plots to a Stand Level"
+format: html
+editor: visual
+author: Prof. Val Lemay
+---
+
+## Lab Overview {.unnumbered}
+
+This lab builds on our previous work to introduce more stand-level summaries as well as using forest data to summarize important forest attributes like volume and biomass. You will work with formulas, created from test data, to understand a forest-stand. Using your estimates you will produce a data summary for a landowner. You may work in groups for this lab, but each student must be able to run the code on their own computer.
+
+------------------------------------------------------------------------
+
+## Learning Objectives {.unnumbered}
+
+-   Practice analysis of fixed-area plots to obtain plot summaries.
+
+-   Use simple random sampling to summarize plot-level data to obtain a stand-level summary
+
+-   Summarize tree-level data to obtain plot-level stand and stock tables. Use this tree level data to obtain stand-level stock and stand tables
+
+## Problem Introduction {.unnumbered}
+
+**General Description**
+
+A landowner hires you to conduct a survey of a 30-ha forested parcel of land (BC Coast). In particular, the owner would like to know how much they could make on the carbon market if they kept this forest intact and sold the carbon credits. From reading several documents, you find out that: 1) about 50% of aboveground biomass is carbon; and 2) the rate for carbon credits is about \$65 CAD per C tonne. The owner would also like to know general information about the timber characteristics for general management purposes.
+
+------------------------------------------------------------------------
+
+## Key Formulas {.unnumbered}
+
+For today's data investigation we will use formulas created by the ministry to calculate volume and dry biomass for different tree species in British Columbia. Models for volume use Schumaker's volume function. The coefficients are described in the table below.
+
+\$\$ Volume(m\^3) = 10\^{(A +B(Log\_{10}(DBH(cm))) + C\*(Log\_{10}(Height(m))))}\$\$
+
+```{r}
+#| echo: false 
+#| warning: false
+#| tbl-cap: BC Ministry of Forest Volume Coefficients 
+set.seed(123)
+library(pacman)
+p_load(tidyverse, flextable, knitr)
+#main coefficients 
+tree_types  <- c('immature western red cedar', 'immature western hemlock', 'immature douglas fir', 'mature western red cedar', 'mature western hemlock', 'mature douglas fir', 'red alder', 'bitter cherry')
+
+# main coefficients 
+A <- c(4.139118, -4.41882, -4.319071, -4.103107, -4.3374,-4.348375, -4.431705,-4.431705)
+B <- c(1.716770,1.867780,1.813820,1.743240,1.783500,1.692440,1.778590,1.778590)
+C <- c(1.047420,1.099890,1.042420,0.981729,1.120230,1.181970,1.090770,1.090770) 
+# Reshape and mutate
+volume_df <- data.frame(tree_types, A, B, C, Type = 'BC\nTraditional') %>% 
+  arrange(Type) %>% mutate_if(is.numeric, .funs = round, digits =2)
+# Create a pretty flextable ## group by Type 
+kable(volume_df, col.names = c('Tree Types', 'A', 'B', 'C', 'Source'))
+# ft <- as_grouped_data(volume_df, groups = "Type") %>% 
+#   flextable(.) %>% 
+#   theme_vanilla() %>% # Merging tree_types column to create a visual grouping 
+#   set_header_labels(
+#     tree_types = "Tree Types",
+#     A = "A", B = "B", C = "C") %>% 
+#   autofit() %>% 
+#   set_caption("Volume Coefficients")
+# ft
+
+```
+
+Similarly, Biomass equations use the following formula:
+
+$$
+Biomass = Intercept+ Slope * DDH
+$$
+
+Where DDH is the diameter squared times the height of the tree. $$
+DDH = (DBH(cm)/100)*(DBH(cm)/100)*Height(m) 
+$$
+
+```{r}
+#| echo: false
+# biomass coefficients 
+#| tbl-cap: Biomass Coefficients sourced from Standish et al. 1985
+trees_types_biomass <- c('mature western red cedar', 'mature western hemlock', 'mature douglas fir', 'red alder', 'bitter cherry')
+int <- c(40.4, 29.8, 37.2, 4.8, 4.8)
+slope <- c(96.9, 155.8, 139.3, 206.5, 206.5)
+biomass_df <- data.frame(trees_types_biomass, int, slope) %>% mutate_if(is.numeric, .funs = round, digits = 2)
+kable(biomass_df, col.names = c('Tree Types', 'Intercepts', 'Slope'))
+# biomass_ft <- flextable(biomass_df) %>% 
+#   theme_vanilla() %>% 
+#   set_header_labels(
+#     trees_types_biomass = "Tree Types",
+#     int = "Intercept", slope = "Slope") %>% 
+#   autofit() %>% 
+#   set_caption("Biomass Coefficients")
+# biomass_ft
+```
+
+## Data Description {.unnumbered}
+
+You decide to use a systematic sampling approach to determine plot centres for *n*=4 plots. For each plot center, you establish a circular, fixed-area plot (r=11.27 m; 0.04 ha) aiming to sample all trees which are ≥ 2.0 cm DBH within this radius. Some plots had a lot of trees and thus a process of "Half Sweeps" was conducted, where a randomly chosen half of the 0.04 ha (or a slice) was selected and only trees in that half of the plot were recorded (i.e., each tree counts twice in the 0.04 ha plot OR the plot size was reduced to 0.02 ha).
+
+For each tree (DBH≥2.0 cm) in the plot (full or half plot), the species was recorded and the DBH (cm) was measured. On a subset of trees, the height (m) was measured in the field. For the remaining trees, the height was estimated in the office using existing height/DBH models (i.e., for each tree without height, the species-specific models developed for this area were used to estimate height from DBH).  For broken trees, the height to the break was measured in the field, and an estimate of the height that the tree might have been if not broken was also recorded in the field. A snapshot of these data are provided below.
+
+From these data, you determine the characteristics of the forest land and report these to the landowner, along with your estimate of potential carbon credits.
+
+```{r}
+#| echo: false
+## data 
+plot_data <- read.csv("Lab4_Plotdata.csv")
+plot_data %>% group_by(PlotNo) %>% 
+  summarise(number_trees = n(), 
+            plot_type = unique(Partial.)) %>% kable(., caption = "Description of four selected plots including # trees & plot type")
+
+```
+
+## Plot Level Analyses {.unnumbered}
+
+This lab will work work with data from four plots available on the course Canvas site. The excel file is called: **exercise4_plot_data_partial analysis.xlsx** from Canvas, along with a prototype excel file called **plot_analysis_fixed_radius_2021.xlsx.** Note that ,much of the analysis already has been done, and you will only need to [fill in the missing values shown as yellow highlights]{.underline} in the **exercise4_plot_data_partial analysis.xlsx** file. Using your analysis, report :
+
+### Question 1 {.unnumbered}
+
+A.  The average tree size in terms of DBH, height, basal area per tree, total volume per tree, and biomass. Remember to [report the measurement units]{.underline} for each value. [*NOTE: Calculate these for each plot separately, and then use these plot-level values to calculate the estimates for the land area using all plots as in the prototype*]{.underline}
+B.  Confidence intervals (95%) for the mean DBH and mean height for the land area. Again, [show the measurement unit]{.underline}s.
+C.  Average volume per ha, basal area per ha, stems per ha, and biomass per ha, and 95% confidence intervals for each of these estimates.Remember to show the [measurement unit]{.underline}s. ***NOTE: Again, calculate these for each plot separately; use plot-level values to calculate the estimates for the land area***
+D.  Estimated total volume and total biomass for the 30-ha area and a 95% confidence interval for each of these, with measurement units.  
+E.  Estimated carbon (tonnes) and estimated carbon credits (\$ CAD), and 95% confidence intervals for each of these, for the 30-ha land area. HINT: Convert the biomass estimates to carbon and then to carbon credits).
+
+### Question 2 {.unnumbered}
+
+Using the **plot_analysis_fixed_radius_with stock stand tables 2021.xlsx** as a prototype, calculate the stems per ha by **10-cm DBH class** (i.e., 2.0 to 10.05, 10.05 to 20.05, 20.05 to 30.05, etc.) and species **for each plot** ([i.e., a stand table)]{.underline} and then averaged for the stand (i.e., [stand-level stand table]{.underline}).  ALSO, get a graph of the stand-level stand table as a histogram. 
+
+### Question 3 {.unnumbered}
+
+Repeat the calculations to obtain a [stock table]{.underline} (i.e., volume per ha by DBH class and species).
+
+### Reporting
+
+Prepare a short summary report for the landowner that includes the following:
+
+A.  An introduction to the report including the location of the survey, type of forest and size of the forest, along with the survey objectives.
+B.  A methods section indicating how the data were obtained (Sampling design? Spacing? Random start? Plot size? Map of plot centres? What was measured for each tree in each plot?
+C.  A results section providing a summary of the important information about this stand, using Q1 to Q4 to guide you on what to include in this section (What would you want your reader to know about the stand? Tree size? Volume perha and biomass per ha? Species composition?). Include tables to support your results. *Make sure to include captions and units for all tables and figures*
+D.  A clearly arranged appendix including your code and answers to the questions in this lab.
+
+------------------------------------------------------------------------
+
+## Lab Questions & Deliverables {.unnumbered}
+
+-   [ ] *Individuals* Complete answers for all three questions in the lab. These should be formatted tables from the excel sheets.
+-   [ ] *Group* A summary report for the landowner including an introduction, methods, results, and an appendix with code and answers to the questions in this lab.
+
+## Summary {.unnumbered}
+
+In this lab, we used R to calculate important plot and stand level attributes. We used these attributes to produce a summary report for a forest stand that will be given to a landowner. We also calculated confidence intervals for our estimates to provide a measure of uncertainty around our estimates.
