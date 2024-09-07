@@ -9,7 +9,7 @@ book:
     - 01-Introduction to Forestry Datasets in QGIS.qmd
     - 02-VRI Forest Cover and Digital Imagery.qmd
     - 03-Simple Sampling Design.qmd
-    - 04-Compilation of Fixed Area Plots to a Stand Level.qmd
+    - 04ex-Compilation of Fixed Area Plots to a Stand Levelex.qmd
     - 05 - Volume, Biomass, and Taper Models.qmd
     - 06- VDYP & TIPSY for Forecasting Inventory Records.qmd
     - 07 - Site Productivity And Density Measures.qmd
