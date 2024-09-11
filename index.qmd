@@ -2,7 +2,7 @@
 title: "FRST 556: Land Information Acquisition and Analysis"
 author: "Chris Mulverhill (Professor)\nSarah Smith-Tripp (Teaching Assistant)"
 date: "2024-07-31"  # You can use a fixed date or keep it dynamic with `date: "`r Sys.Date()`"`
-description: "Open Educational Resources for GEM 511 course at the University of British Columbia"
+description: "Open Educational Resources for FRST 556 course at the University of British Columbia"
 format:
   html:
     toc: true
@@ -16,9 +16,6 @@ format:
 documentclass: book
 #bibliography: book.bib  # Ensure this points to your bibliography file
 always_allow_html: true
-github:
-  repo: https://github.com/ubc-geomatics-community-of-practice/GEM511-Advanced-GIS-for-Environmental-Management/book
-url: "https://github.com/ubc-geomatics-community-of-practice/GEM511-Advanced-GIS-for-Environmental-Management/book/"
 ---
 
 # Welcome {.unnumbered}
@@ -47,4 +44,4 @@ Unless otherwise noted, all materials are Open Educational Resources (OER) and l
 
 ## How to get involved {.unnumbered}
 
-Because this is an open project, we highly encourage contributions from the community. The content is hosted on our [GitHub repository](https://github.com/ubc-geomatics-community-of-practice/GEM511-Advanced-GIS-for-Environmental-Management) and from there you can [open an issue or start a discussion](https://github.com/ubc-geomatics-community-of-practice/GEM511-Advanced-GIS-for-Environmental-Management/issues/new). Feel free to open an issue for any typos, factual discrepancies, bugs, or topics you want to see. We are always looking for great Canadian case studies to share! You can also fork our GitHub repository to explore the source code and take the content offline.
+Because this is an open project, we highly encourage contributions from the community. The content is hosted on our [GitHub repository](https://github.com/ubc-geomatics-community-of-practice/FRST556-Land-Information-Acquisition-and-Analysis) and from there you can [open an issue or start a discussion](https://github.com/ubc-geomatics-community-of-practice/FRST556-Land-Information-Acquisition-and-Analysis/issues). Feel free to open an issue for any typos, factual discrepancies, bugs, or topics you want to see. We are always looking for great Canadian case studies to share! You can also fork our GitHub repository to explore the source code and take the content offline.
