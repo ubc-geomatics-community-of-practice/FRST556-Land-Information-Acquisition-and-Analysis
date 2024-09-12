@@ -4831,23 +4831,23 @@ Note
 <p><img src="images/clipboard-1857806976.png" class="img-fluid" width="346"></p>
 <ol start="8" type="A">
 <li><p>In the right-hand side under <strong>Layers</strong> click the checkmark that says <strong>Lock layers and Lock styles for Layers</strong> this prevents your map from automatically updating.</p></li>
-<li><p>Add a legend<strong>.</strong> In <strong>Legend items</strong> uncheck “auto update” and remove all legend items are are not your forest cover polygons. On the forest polygon layer right-click to check “hidden.” In the <strong>Title</strong> for the legend put “Forest Polygon Class”</p></li>
-<li><p>Right click on the map on your map layout to <strong>copy and paste</strong> the map so there is a duplicate map next to your forest polygon map. With this map selected <strong>uncheck</strong> the <strong>Lock layers and Lock styles for Layers</strong>. Navigate back to your map canvas</p></li>
+<li><p>Add a legend<strong>.</strong> In <strong>Legend items</strong> uncheck “auto update” and remove all legend items that are are not your forest cover polygons. On the forest polygon layer right-click to check “hidden.” In the <strong>Title</strong> for the legend put “Forest Polygon Class”</p></li>
+<li><p>Right click on the map on your map layout to <strong>copy and paste</strong> the map so there is a duplicate map next to your forest polygon map. With this new map selected, <strong>uncheck</strong> the <strong>Lock layers and Lock styles for Layers</strong>. Navigate back to your map canvas.</p></li>
 </ol>
 <p><strong>Step 9</strong> We’ll now map the average green brightness value in these polygons.</p>
 <ol type="A">
 <li>Using your layer that we calculated zonal statistics on, which should still be colored black-to-white. Move this layer to the top of the map canvas.</li>
-<li>Navigate back to your map layout. With the copied map selected change the name to “zonal mean.” In the item properties tab click the circular “refresh” button. This will update the map to the current canvas layers. Click <strong>Lock layers and Lock styles for Layer.</strong><br>
+<li>Navigate back to your map layout. With the copied map selected, change the name to “zonal mean.” In the item properties tab click the circular “refresh” button. This will update the map to the current canvas layers. Click <strong>Lock layers and Lock styles for Layer.</strong><br>
 <img src="images/clipboard-1003007197.png" class="img-fluid"></li>
-<li>Copy the Legend from your polygons layer. Change the reference map to the zonal statistics layer. In the legend properties check “update all”. Change the <strong>Title</strong> to “Mean Bit Brightness (Green Band)”.<br>
+<li>Copy the Legend from your polygons layer. Change the reference map to the zonal statistics map. In the legend properties check “update all”. Change the <strong>Title</strong> to “Mean Bit Brightness (Green Band)”.<br>
 <img src="images/clipboard-798660786.png" class="img-fluid"></li>
-<li>Right click on the map on your map layout to <strong>copy and paste</strong> the map so there is a duplicate map next to your forest zonal statistics map. With this map selected <strong>uncheck</strong> the <strong>Lock layers and Lock styles for Layers</strong>. Navigate back to your map canvas.</li>
+<li>Right click on the map on your map layout to <strong>copy and paste</strong> the map so there is a duplicate map next to your forest zonal statistics map. With this map selected, <strong>uncheck</strong> the <strong>Lock layers and Lock styles for Layers</strong>. Navigate back to your map canvas.</li>
 </ol>
 <p><strong>Step 10</strong> Follow a similar process to step 9, but this time change the zonal statistics layer to the standard deviation. See <a href="#fig-2">Figure&nbsp;<span>3.2</span></a> for an example of your final output.</p>
 <div id="fig-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="images/ForestCoverMap.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Example output for forest cover map. **Note your map will be different according to where you place your polygons</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: Example output for forest cover map. **Note your map will be different according to where you place your polygons.</figcaption><p></p>
 </figure>
 </div>
 <section id="question-9" class="level3 unnumbered">
@@ -4856,7 +4856,7 @@ Note
 </section>
 <section id="question-10" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="question-10">Question 10:</h3>
-<p>Normally, photo-interpreters would have a 3-D view of a stereo-pair of photos and they could see and measure stand heights. What other information might help the photo-interpreter assign heights to each stand?&nbsp; HINTS: As well as imagery, what other information might they access? How do other attributes impact height?</p>
+<p>Normally, photo-interpreters would have a 3-D view of a stereo-pair of photos and they could see and measure stand heights. What other information might help the photo-interpreter assign heights to each stand?&nbsp;HINT: As well as imagery, what other information might they access? How do other attributes impact height?</p>
 </section>
 <section id="map-1" class="level3 unnumbered" style="Color: navy">
 <h3 class="unnumbered anchored" style="Color: navy" data-anchor-id="map-1">Map 1:</h3>
@@ -4866,17 +4866,16 @@ Note
 </section>
 <section id="task-4-satellite-images-compared-to-aerial-photographs" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="task-4-satellite-images-compared-to-aerial-photographs">Task 4: Satellite Images Compared to Aerial Photographs</h2>
-<p>Images collected using satellites provide the base data used to create Google Maps, Google Earth Views, etc. Of these, data collected on Landsat satellites is very commonly used. However, other imagery is often needed to provide finer spatial details, historic views, and 3-D views. You will learn more about other imagery in FRST 538. For now, you will look at the Landsat imagery provided for MKRF and compare these to the aerial photographs. Specifically, you will look at how these images might be used to update for natural and human disturbances.</p>
-<p><strong>Step 1</strong> Add the 2019 Landsat RGB image, keeping both the 2008 and 2006 orthoimages loaded. Clearly, there are differences in the spectral reflectance and the resolution of these two images. However, Landsat is free and is consistently capturing imagery from space every two-weeks (when it is cloud free).</p>
-<p><strong>Step 2</strong> qualitatively compare the orthoimages from the satellite data. Use this to answer the last lab questiosn</p>
-<p>Which year (1999 or 1989) had a large polygon size for western red-cedar dominated stands? Please answer in hectares.</p>
+<p>Images collected using satellites provide the base data used to create Google Maps, Google Earth Views, etc. Of these, data collected by Landsat satellites is very common used. However, other imagery is often needed to provide finer spatial detail, historic views, and 3-D views. You will learn more about other imagery in FRST 538. For now, you will look at the Landsat imagery provided for MKRF and compare these to the aerial photographs. Specifically, you will look at how these images might be used to update after natural and human disturbances.</p>
+<p><strong>Step 1</strong> Add the 2019 Landsat RGB image, keeping both the 2008 and 2006 orthoimages loaded. Clearly, there are differences in the spectral reflectance and the resolution of these two images. However, Landsat is free and has consistently captured images of our earth from two-weeks (when it is cloud free) since its launch in the 1970s.</p>
+<p><strong>Step 2</strong> Qualitatively compare the orthoimages from the satellite data. Use this to answer the last lab question.</p>
 <section id="question-11" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="question-11">Question 11:</h3>
 <p>If you were monitoring a forest area for <u>harvest disturbances</u>, would you choose to get new aerial photographs or would you use available Landsat data? Consider <u>the costs, the spatial resolution of the images relative to the disturbance size, and the frequency that images are acquired</u>.</p>
 </section>
 <section id="question-12" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="question-12">Question 12:</h3>
-<p>What about using landsat data for something like small-scale wind damage? Or small-scale fires? What about roads?</p>
+<p>What about using Landsat data for something like small-scale wind damage? Or small-scale fires? What about roads?</p>
 <hr>
 </section>
 </section>
@@ -4888,7 +4887,7 @@ Note
 <li><p><input type="checkbox">Question 1: Which description of forest composition and structure (VRI and forest cover) has more polygons?</p></li>
 <li><p><input type="checkbox">Question 2: Which descriptor of forest composition has a larger average polygon? Which one has a larger maximum polygon?</p></li>
 <li><p><input type="checkbox">Question 3: What is the projected age for the polygon at this site? Does this make sense? Why or why not? Insert a screenshot (include a figure caption!) to support your answer.</p></li>
-<li><p><input type="checkbox">Question 4: Look for two other forest disturbances or land-cover changes anywhere in MKRF recorded in the 2006 orthomosaic but not recorded in the 2014 VR</p></li>
+<li><p><input type="checkbox">Question 4: Look for two other forest disturbances or land-cover changes anywhere in MKRF recorded in the 2006 orthomosaic but not recorded in the 2014 VRI.</p></li>
 <li><p><input type="checkbox">Question 5: Malcolm Knapp is privately owned land, meaning not all disturbances are consistently added to VRI. Given this, what are some of the disadvantages of relying on VRI alone? What additional tools can we use to better update VRI? Respond in a clear and well written paragraph format.</p></li>
 <li><p><input type="checkbox">Question 6: Zoom into the locations noted on the table. Use the <img src="images/clipboard-1450729439.png" class="img-fluid" width="27"> tool located in the upper right of QGIS to retrieve RGB values for the following areas. Once you have filled in the table, discuss why you think different landcovers have different pixel values.</p>
 <table class="table">
@@ -4949,7 +4948,7 @@ Note
 <li><p><input type="checkbox">Question 7: When you look at a clear cut area, what characteristics support an area is harvested? Consider size, shape, texture, proximity to other features, etc. List three specific characteristics to identify a harvested area that you could give to someone else who has never seen an above view of a clear cut.</p></li>
 <li><p><input type="checkbox">Question 8: Create a reference table that describes specific characteristics that can help differentiate land cover types using aerial imagery. For each feature in the below table include 3 characteristics of the different land covers.</p></li>
 <li><p><input type="checkbox">Question 9: How do values for your different forest polygons layer differ in terms of brightness? What feature had the highest greenness reflectance? Which feature had the most variable greenness reflectance? Use values to support your results.</p></li>
-<li><p><input type="checkbox">Question 10: Normally, photo-interpreters would have a 3-D view of a stereo-pair of photos and they could see and measure stand heights. What other information might help the photo-interpreter assign heights to each stand?&nbsp; HINTS: As well as imagery, what other information might they access? How do other attributes impact height?</p></li>
+<li><p><input type="checkbox">Question 10: Normally, photo-interpreters would have a 3-D view of a stereo-pair of photos and they could see and measure stand heights. What other information might help the photo-interpreter assign heights to each stand?&nbsp;HINT: As well as imagery, what other information might they access? How do other attributes impact height?</p></li>
 <li><p><input type="checkbox">Question 11: If you were monitoring a forest area for <u>harvest disturbances</u>, would you choose to get new aerial photographs or would you use available Landsat data? Consider <u>the costs, the spatial resolution of the images relative to the disturbance size, and the frequency that images are acquired</u>.</p></li>
 <li><p><input type="checkbox">Question 12. What about using landsat data for something like small-scale wind damage? Or small-scale fires? What about roads?</p></li>
 </ul></li>

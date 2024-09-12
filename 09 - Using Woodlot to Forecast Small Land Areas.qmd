@@ -7,9 +7,9 @@ editor: visual
 
 ## Background & Overview {.unnumbered}
 
-You looked at the fc VRI 2014 polygons in Exercise 1, and you forecasted three of these stands in Exercise 6.  You also looked at the 2020 vegetation cover layer in Activity 8.  In Exercise 9, you will use Woodlot to forecast the future forest for about half of MKRF (about 2,500 ha) using the 2020 vegetation cover data, along with VDYP and TIPSY.  
+You looked at the fc VRI 2014 polygons in Exercise 1, and you forecasted three of these stands in Exercise 6. You also looked at the 2020 vegetation cover layer in Activity 8. In Exercise 9, you will use Woodlot to forecast the future forest for about half of MKRF (about 2,500 ha) using the 2020 vegetation cover data, along with VDYP and TIPSY.
 
-The goal is for you to become familiar with how forecast models work for a medium-sized land area, and how you can forecast the future forecast using a tool, in this case, Woodlot.  You will simulate three forest management scenarios, compare the outcomes, and suggest another scenario that you might want to do based on the outputs obtained for these three scenarios.
+The goal is for you to become familiar with how forecast models work for a medium-sized land area, and how you can forecast the future forecast using a tool, in this case, Woodlot. You will simulate three forest management scenarios, compare the outcomes, and suggest another scenario that you might want to do based on the outputs obtained for these three scenarios.
 
 ------------------------------------------------------------------------
 
@@ -21,11 +21,9 @@ The goal is for you to become familiar with how forecast models work for a mediu
 
 ## Assignment Introduction {.unnumbered}
 
-
 ------------------------------------------------------------------------
 
 ## Forest Management Problems {#sec-problems .unnumbered}
-
 
 ------------------------------------------------------------------------
 
