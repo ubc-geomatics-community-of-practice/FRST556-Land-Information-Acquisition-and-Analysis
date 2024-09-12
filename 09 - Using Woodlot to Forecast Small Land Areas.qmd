@@ -1,0 +1,76 @@
+---
+title: "Exercise 9:  Using Woodlot to Forecast Small Land Areas"
+author: "Sarah Smith-Tripp"
+format: html
+editor: visual
+---
+
+## Background & Overview {.unnumbered}
+
+You looked at the fc VRI 2014 polygons in Exercise 1, and you forecasted three of these stands in Exercise 6. You also looked at the 2020 vegetation cover layer in Activity 8. In Exercise 9, you will use Woodlot to forecast the future forest for about half of MKRF (about 2,500 ha) using the 2020 vegetation cover data, along with VDYP and TIPSY.
+
+The goal is for you to become familiar with how forecast models work for a medium-sized land area, and how you can forecast the future forecast using a tool, in this case, Woodlot. You will simulate three forest management scenarios, compare the outcomes, and suggest another scenario that you might want to do based on the outputs obtained for these three scenarios.
+
+------------------------------------------------------------------------
+
+## Learning Objectives {.unnumbered}
+
+-   THIS LAB WILL BE UPDATED IN THE FUTURE
+
+------------------------------------------------------------------------
+
+## Assignment Introduction {.unnumbered}
+
+------------------------------------------------------------------------
+
+## Forest Management Problems {#sec-problems .unnumbered}
+
+------------------------------------------------------------------------
+
+## Lab Questions & Deliverables {#sec-turnin .unnumbered}
+
+-   [ ] A Short report including
+
+    -   [ ] Introduction: Provide a description of the management problem that you are addressing as separate introduction section. Include the objective and the criteria you will use to meet the objectives. Correctly cite any references you used to support these criteria.
+
+    -   [ ] Data components: Provide an explanation of the data you would need for this problem, why these are needed, and the sources of the data. Create a well-formatted table to support the text. Correctly site any information you used to support your statements on data needed for this problem. Also, try not to repeat the information you have in the table, but rather summarize it into statements and refer to the information in the table. Remember that the table must have a table caption above the table.
+
+    -   [ ] Methods: Describe the general workflow that you will need to follow to create the data products you will need. Introduce the workflow first and then list the steps. *You might find that using a flowchart figure helpful.* Remember that a figure must have a figure caption below the figure and the text explaining the figure must appear before the figure appear. objective and the criteria you will use to meet the objectives. Correctly cite any references you used to support these criteria.
+
+    -   [ ] References Cited: Add in a carefully formatted references cited section for any supporting documents for statements you made on information needs. For this, please use the Author, Date format.
+
+-   **Key Grading Criteria**
+
+    -   [ ] Presentation & Clarity, 4 points maximum - For this, the considerations that will be used in assigning points out of 4 are: • The report includes all sections, is well-organized, and is well-written.
+
+        -   Tables and figures are correctly referenced and introduced in the text (rather than just appearing);
+
+        -   Any points listings are correctly introduced (example is this paragraph).
+
+        -   Figure captions are under the figure.
+
+        -   Table captions are above the table. • Figures and tables appear after the point in the text that they are first referenced
+
+        -   References cited in the text are correctly cited in the text and listed in the “References cited” section.
+
+    -   \[\] Content, 6 points maximum - For this, the considerations that will be used in assigning points out of 6 are:
+
+        -   the introduction to the problem is clearly stated, along with clearly stated objective(s), and criteria to be used in meeting these objective(s).
+
+        -   There is no critical criterion missing.
+
+        -   Any criteria that might be easily debated (e.g., why this species?) are supported with references.
+
+        -   The text associated with the EXCEL table explains an overview of what the reader will see in the table
+
+        -   Table created using EXCEL:
+
+            -   Each bit of information describes the data (what, where, when), why it is needed based on the criteria, and an associated source (who); and
+
+        -   There is no critical data source that is missing from the report. For example, the information on tree species may be critical for the management problem, and that was not included.
+
+        -   The flowchart of steps provides a clear indication of what data are to be used, why this step is needed, and how the data will be used. The steps must be in a logical order.
+
+## Summary {.unnumbered}
+
+This lab pulled together our learnings from the course to address a real forest management issue as a group. Congrats!
