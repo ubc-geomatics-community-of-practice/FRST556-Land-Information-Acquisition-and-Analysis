@@ -7,7 +7,7 @@ editor: visual
 
 ## Lab Overview {.unnumbered}
 
-British Columbia relies heavily on surveying from aerial imagery to understand forest health. Aerial surveys have been used throughout BC's recent history to understand forest composition and health. Aerial imagery is the key input into the vegetation resource inventory (or VRI) used to understand the composition of BCs forests. The process has two phases:
+British Columbia relies heavily on surveying from aerial imagery to understand forest dynamics. Aerial surveys have been used throughout BC's recent history to understand forest composition and health. Aerial imagery is the key input into the vegetation resource inventory (or VRI) which describe composition of BCs forests. The VRI process has two phases:
 
 -   Phase 1: Using aerial imagery, forests are divided into homogeneous areas called "polygons."
 
@@ -100,9 +100,9 @@ NOTE: Remember that for a color rendition of an image, white objects reflect hig
 :::
 
 | E       | N      | Landcover | Red Brightness | Green Brightness | Blue Brightness |
-|---------|--------|-----------|----------------|------------------|-----------------|
+|------------|------------|------------|------------|------------|------------|
 | 1248400 | 481890 |           |                |                  |                 |
-| 1247760 | 848198 |           |                |                  |                 |
+| 1247760 | 488198 |           |                |                  |                 |
 | 1248195 | 483318 |           |                |                  |                 |
 | 1247019 | 483138 |           |                |                  |                 |
 
@@ -217,7 +217,6 @@ Images collected using satellites provide the base data used to create Google Ma
 
 **Step 2** Qualitatively compare the orthoimages from the satellite data. Use this to answer the last lab question.
 
-
 ### Question 11: {.unnumbered}
 
 If you were monitoring a forest area for [harvest disturbances]{.underline}, would you choose to get new aerial photographs or would you use available Landsat data? Consider [the costs, the spatial resolution of the images relative to the disturbance size, and the frequency that images are acquired]{.underline}.
@@ -245,7 +244,7 @@ What about using Landsat data for something like small-scale wind damage? Or sma
     -   [ ] Question 6: Zoom into the locations noted on the table. Use the ![](images/clipboard-1450729439.png){width="27"} tool located in the upper right of QGIS to retrieve RGB values for the following areas. Once you have filled in the table, discuss why you think different landcovers have different pixel values.
 
         | E       | N      | Landcover | Red Brightness | Green Brightness | Blue Brightness |
-        |---------|--------|-----------|----------------|------------------|-----------------|
+        |------------|------------|------------|------------|------------|------------|
         | 1248400 | 481890 |           |                |                  |                 |
         | 1247760 | 848198 |           |                |                  |                 |
         | 1248195 | 483318 |           |                |                  |                 |
@@ -267,7 +266,7 @@ What about using Landsat data for something like small-scale wind damage? Or sma
 
 -   [ ] Complete Maps for :
 
-    -   [ ] Your photo-interpreted forest polygons. Include the mean and standard deviation for the green birghtness values form the 2006 orthomosaic.
+    -   [ ] Your photo-interpreted forest polygons. Include the mean and standard deviation for the green brightness values form the 2006 orthomosaic.
     -   Make sure that your map includes:
         -   A title
         -   A scale bar
