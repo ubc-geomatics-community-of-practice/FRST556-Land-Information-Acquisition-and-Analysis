@@ -100,7 +100,7 @@ NOTE: Remember that for a color rendition of an image, white objects reflect hig
 :::
 
 | E       | N      | Landcover | Red Brightness | Green Brightness | Blue Brightness |
-|------------|------------|------------|------------|------------|------------|
+|---------|--------|-----------|----------------|------------------|-----------------|
 | 1248400 | 481890 |           |                |                  |                 |
 | 1247760 | 488198 |           |                |                  |                 |
 | 1248195 | 483318 |           |                |                  |                 |
@@ -244,7 +244,7 @@ What about using Landsat data for something like small-scale wind damage? Or sma
     -   [ ] Question 6: Zoom into the locations noted on the table. Use the ![](images/clipboard-1450729439.png){width="27"} tool located in the upper right of QGIS to retrieve RGB values for the following areas. Once you have filled in the table, discuss why you think different landcovers have different pixel values.
 
         | E       | N      | Landcover | Red Brightness | Green Brightness | Blue Brightness |
-        |------------|------------|------------|------------|------------|------------|
+        |---------|--------|-----------|----------------|------------------|-----------------|
         | 1248400 | 481890 |           |                |                  |                 |
         | 1247760 | 848198 |           |                |                  |                 |
         | 1248195 | 483318 |           |                |                  |                 |
