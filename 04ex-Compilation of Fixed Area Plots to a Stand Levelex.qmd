@@ -149,4 +149,4 @@ D.  A clearly arranged appendix including your code and answers to the questions
 
 ## Summary {.unnumbered}
 
-In this lab, we used R to calculate important plot and stand level attributes. We used these attributes to produce a summary report for a forest stand that will be given to a landowner. We also calculated confidence intervals for our estimates to provide a measure of uncertainty around our estimates.
+In this lab, we used excel to calculate important plot and stand level attributes. We used these attributes to produce a summary report for a forest stand that will be given to a landowner. We also calculated confidence intervals for our estimates to provide a measure of uncertainty around our estimates.

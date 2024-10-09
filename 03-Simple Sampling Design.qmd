@@ -1,7 +1,5 @@
 ```{r}
 #| echo: false 
-yml_content <- yaml::read_yaml("chapterauthors.yml")
-author <- yml_content[["terrain-spatial-interpolation"]][["author"]]
 ```
 
 # Exercise 3: Simple Sampling Designs {#terrain-spatial-interpolation}
@@ -10,7 +8,6 @@ Written by
 
 ```{r results='asis'}
 #| echo: false
-cat(author)
 ```
 
 ```{r}
@@ -328,7 +325,7 @@ c_day <- 1000 ## cost/day
 A <- 100 ## area 
 a <- 0.02 ## plot area 
 n_plots <- ((c - 5000) /c_day) * 8 
-## resolve equations for I 
+# resolve equations for I 
 #(n_plots * a) / A
 ```
 
