@@ -7,9 +7,9 @@ editor: visual
 
 ## Lab Overview {.unnumbered}
 
-For timber supply (and other forest-level analyses), forecasts of each stand (or aggregates of similar stands) are needed to evaluate different management scenarios. For these analyses, yield tables for each stand type and management regime are needed to make these forecasts. In BC, VDYP is used for “unmanaged” stands and TIPSY is used for “managed” stands. There are other models (e.g., PrognosisBC) also available for use by BC forest professionals. 
+For timber supply (and other forest-level analyses), forecasts of each stand (or aggregates of similar stands) are needed to evaluate different management scenarios. For these analyses, yield tables for each stand type and management regime are needed to make these forecasts. In BC, VDYP is used for “unmanaged” stands and TIPSY is used for “managed” stands. There are other models (e.g., PrognosisBC) also available for use by BC forest professionals.
 
-:::{.callout-note collapse='true'}
+::: {.callout-note collapse="true"}
 ## Growth & Yield Models in BC
 
 **TIPSY**
@@ -121,11 +121,15 @@ To become familiar with how VDYP and TIPSY can be used to forecast the growth an
 
 You looked at the 2014 VRI forest cover for MKRF in FRST 556, Ex.1 and 2. Using these data, all stands where western redcedar (*Thuja plicata*) was species with the largest percent were selected using QGIS. The attributes were exported as a .csv file, which was sorted, attributes were trimmed (i.e., some attributes were removed), and then the results were saved as CW dominated polygons trimmed.xlsx. Three of these stands in the northwestern part of MKRF were selected as stands of interest (CW dominated three polygons trimmed.xlsx). A few of the attributes of these polygons are shown in @tbl-polys, and an image of the location of these stands is shown in Figure 1
 
-| LY_ID | LBL_SPECIS | EST_SI_SPC | EST_SI (m) | CR_CLOSURE (%) | Shape_Ar (in ha) |
-|-------|------------|------------|------------|----------------|------------------|
-| 611   | CwHw(Fd)   | CW         | 20         | 65             | 11.1             |
-| 621   | CwHw(Fd)   | CW         | 21         | 65             | 2.1              |
-| 622   | CwHw(Fd)   | CW         | 18         | 70             | 7.1              |
++----------+------------+------------+------------+----------------+------------------+
+| POLY_ID  | LBL_SPECIS | EST_SI_SPC | EST_SI (m) | CR_CLOSURE (%) | Shape_Ar (in ha) |
++==========+============+============+============+================+==================+
+| 611      | CwHw(Fd)   | CW         | 20         | 65             | 11.1             |
++----------+------------+------------+------------+----------------+------------------+
+| 621      | CwHw(Fd)   | CW         | 21         | 65             | 2.1              |
++----------+------------+------------+------------+----------------+------------------+
+| 622      | CwHw(Fd)   | CW         | 18         | 70             | 7.1              |
++----------+------------+------------+------------+----------------+------------------+
 
 : Table 1. Three polygons selected from the western redcedar dominated stands of MKRF (Data Source: VRI 2014 forest cover map, layer 1). {#tbl-polys}
 
@@ -135,7 +139,7 @@ You looked at the 2014 VRI forest cover for MKRF in FRST 556, Ex.1 and 2. Using 
 • POLY_ID is the ID for the polygon: • LBL_SPECIS shows the species from the highest to lowest percent (species in brackets have very low percentages) • EXT_SI_SPC is the species used for the site index reported; EST_SI is the site index for the stand in m; • CR_CLOSURE is the percent of the ground covered by trees; and • Shape_Area is reported in m2 by QGIS (and in ARCGIS software), but these have been converted to ha (This may be less than POLY_AREA in the VRI data, since the polygon may extend outside of the MKRF boundary).
 :::
 
-![Figure 1. Map of three selected (in green) western redcedar dominated polygons of MKRF. (Data Source: VRI 2014 forest cover map, layer 1).](images/clipboard-1804548772.png)
+![Figure 1. Map of three selected (in green) western redcedar dominated polygons of MKRF. (Data Source: VRI 2014 forest cover map, layer 1).](docs/images/clipboard-1804548772.png)
 
 In the CW dominated three polygons **trimmed.xlsx** file, you will also find the species percentages for these three selected polygons, and other attributes that you may need as inputs to VDYP to forecast this stand. Using VDYP, forecast these three stands from 0 to 250 years total age at 10-year intervals. You will get a yield a yield trajectory for each attribute in each of three stands (i.e., total volume per ha, merchantable volume per ha, stems per ha, etc. over time).
 
@@ -150,11 +154,24 @@ In the CW dominated three polygons **trimmed.xlsx** file, you will also find the
 1.  Graph the total volume per ha (m^3^/ha) over total age (years) for each stand.  Which stand appears to be the most productive? Explain your answer. 
 2.  Graph the total volume mean annual increment (MAI or m.a.i., m^3^/ha/year) over total age for each of these three stands.   What is the biological rotation age for each stand?
 
-![Figure 2. Example of the total volume per ha and MAI for three selected stands.](images/clipboard-1872295870.png){fig-align="center"}
+![Figure 2. Example of the total volume per ha and MAI for three selected stands.](docs/images/clipboard-1872295870.png){fig-align="center"}
 
 3.  Repeat #2, but this time use the merchantable volume per ha (i.e., all trees 12.5 cm + DBH).   Are the biological rotation ages different than using the total volume per ha?
 4.  For each stand, what is the merchantable volume per ha (12.5 cm + DBH) at the biological rotation age (i.e., at the maximum m.a.i. for this volume)?  What is the average tree size in terms of average height (here Lorey’s height) and average DBH (here Quadratic Mean DBH)?
-5.  For each stand, what is current, estimated merchantable volume (12.5 cm + DBH) for the entire stand? HINT: First, determine the stand age as of 2014 using the VRI polygon attributes, and adjust this age to current year (2024) Then, look up the merchantable volume per ha (12.5 cm+ DBH) for that stand age. Finally, determine the current merchantable volume for the entire stand.
+5.  For each stand, what is current, estimated merchantable volume (12.5 cm + DBH) for the entire stand? HINT: First, determine the stand age as of 2014 using the VRI polygon attributes, and adjust this age to current year (2024) Then, look up the merchantable volume per ha (12.5 cm+ DBH) for that stand age. Finally, determine the current merchantable volume for the entire stand. Report this follow the table below:
+    3.  
+
+        +---------+----------+----------+-------------------+-------------+-------------------+
+        | Poly_ID | Age 2014 | Age 2024 | Close Utilization | Shape area  | Close Utilization |
+        |         |          |          |                   |             |                   |
+        |         |          |          | (per ha)          | Ha          | (m\^\^3)          |
+        +=========+==========+==========+===================+=============+===================+
+        |         |          |          |                   |             |                   |
+        +---------+----------+----------+-------------------+-------------+-------------------+
+        |         |          |          |                   |             |                   |
+        +---------+----------+----------+-------------------+-------------+-------------------+
+        |         |          |          |                   |             |                   |
+        +---------+----------+----------+-------------------+-------------+-------------------+
 6.  Based on the information you now have, would you recommend that any of these stands be harvested in the next 10 years or not? Explain your answer.
 
 ------------------------------------------------------------------------
@@ -187,4 +204,5 @@ Using EXCEL and the outputs from your VDYP and TIPSY forecasts:
 -   [ ] *all graphs and tables have captions and proper units*
 
 ## Summary {.unnumbered}
-In this lab we introduced two critical software tools that foresters in BC use everyday - TIPSY (for managed stands) and VDYP (for unmanaged stands). We applied these to understand growth in an unmanaged stand that we turned into (via harvest) a managed stand. 
+
+In this lab we introduced two critical software tools that foresters in BC use everyday - TIPSY (for managed stands) and VDYP (for unmanaged stands). We applied these to understand growth in an unmanaged stand that we turned into (via harvest) a managed stand.

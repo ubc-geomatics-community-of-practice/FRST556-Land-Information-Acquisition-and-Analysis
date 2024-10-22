@@ -2,22 +2,12 @@
 title: "Exercise 5 - Volume, Biomass, and Taper Models"
 format: html
 editor: visual
+author: Prof. Emeritus Valerie LeMay (Updated by Sarah Smith-Tripp)
 ---
-
-```{r echo=FALSE}
-yml_content <- yaml::read_yaml("chapterauthors.yml")
-author <- yml_content[["terrain-spatial-interpolation"]][["author"]]
-```
-
-Written by
-
-```{r results='asis', echo=FALSE}
-cat(author)
-```
 
 ## Lab Overview {.unnumbered}
 
-![](images/clipboard-543746522.png){fig-align="center" width="510"}
+![](docs/images/clipboard-543746522.png){fig-align="center"}
 
 To gain a better understanding of how to use tree allometric models for volume, taper, merchantable length/height, log volume, and biomass. If you are comfortable working with R or python for this lab please feel free to do so. This lab does not require using R for final computations. To successfully run this lab in code format feel free to talk to your TA. Instructions are given for the excel version.
 
@@ -31,31 +21,37 @@ To gain a better understanding of how to use tree allometric models for volume, 
 
 ## Task 1 - Total Volume {.unnumbered}
 
+::: {.callout-tip icon="false"}
+## General Tip
+
+Throughout this lab you may find it useful to answer each question by duplicating the example excel sheet titled "Taper for Douglas fir, CW" and then modifying both the equation coefficients and tree measurements. Then, you can go back and look and/or compare results as you work through the lab.
+:::
+
 **General Description**
 
 ### Question 1 {.unnumbered}
 
-1.  Calculate [the estimated total tree volume]{.underline} for a hybrid spruce (Picea *glauca* (Moench) Voss X P. e*nglemannii* Parry ex Engelm.) tree growing in the ESSF near Smithers, BC with a DBH=80.0 cm and height= 35.0 m [using the Kozak (2002) taper model]{.underline}.
-2.  Use the EXCEL example provided modify necessary values for DBH, height, and betas (see the top of the sheet).
-3.  Once modified, get the total volume as well as a taper graph. Input both of these as your answer to question
+1.  Calculate [the estimated total tree volume]{.underline} for a hybrid spruce (Picea *glauca* (Moench) Voss X P. e*nglemannii* Parry ex Engelm.) tree growing in the ESSF near Smithers, BC with a DBH=80.0 cm and height= 35.0 m [using the Kozak (2002) taper model included with the assignment .zip]{.underline}.
+2.  Use the EXCEL example provided modify necessary values for DBH, height, and betas (highlighted in yellow at the top of the sheet).
+3.  Once modified, get the total volume as well as a taper graph. Input both of these as your answer to question. Report the volume to four decimal places only.
 
-### Question 2 {.unnumbered} 
+### Question 2 {.unnumbered}
 
-Calculate [the estimated total tree volume]{.underline} for a hybrid spruce (Picea *glauca* (Moench) Voss X P. *englemannii* Parry ex Engelm.) tree growing in the ESSF near Smithers, BC with a DBH=20.0 cm and and 12.0 m in height. Do this as well for a tree of 100 cm and 42.0 m in height. In your answer for this question, include a 3 row table with the volumes, DBH, and height of each tree.
+Calculate [the estimated total tree volume]{.underline} for a hybrid spruce (Picea *glauca* (Moench) Voss X P. *englemannii* Parry ex Engelm.) tree growing in the ESSF near Smithers, BC with a DBH = 20.0 cm and and 12.0 m in height. Do this as well for a tree of 100 cm and 42.0 m in height. In your answer for this question, include a 3 row table with the volumes, DBH, and height of the two trees from this question, and the tree from question 1.
 
 ### Question 3 {.unnumbered}
 
-Compare the estimated taper shape for the original tree to the smaller and larger trees in a short report. Why would this shape change for different tree sizes? How does this “help” the tree? Give at least two reasons why the shape changes as the tree size gets larger. Add in the three graphs of tree shapes to your short report to support your statements.
+Compare the estimated taper shape for the original tree to the smaller and larger trees in a short report. Why would this shape change for different tree sizes? How does this “help” the tree? Give at least two reasons why the shape changes as the tree size gets larger. Add in the three graphs of tree shapes (from question 1 and 2) to your short report to support your statements.
 
 ## Task 2 - Merchantable Volume {.unnumbered}
 
 ### Question 4 {.unnumbered}
 
-Use the Kozak (2002) taper model again, but this time to calculate the estimated merchantable volume for the large tree from a 0.3 m stump height to a 10.0 cm top diameter inside bark. Some parts of the tree will not be included in this merchantable volume and will have a zero volume, namely the stump segment, and the parts of the tree above 10.0 cm top diameter inside bark. You will have to modify the section lengths to obtain a 10.0 cm top diameter inside bark and then sections higher than this will have a zero volume. What is the merchantable tree volume? Again, keep four decimals only.
+Use the Kozak (2002) taper model again, but this time to calculate the *estimated merchantable volume* for the large tree from a 0.3 m stump height to a 10.0 cm top diameter inside bark. Some parts of the tree will not be included in this merchantable volume and will have a zero volume, namely the stump segment, and the parts of the tree above 10.0 cm top diameter inside bark. You will have to iteratively modify the "percent of height" column to obtain an estimated 10.0 cm top diameter inside bark. For the merchantable height and volume calculations all sections above the 10.0 cm diameter length will have a zero volume. What is the merchantable tree volume? Again, keep four decimals only.
 
 ### Question 5 {.unnumbered}
 
-Determine the estimated merchantable height (i.e., ground to merchantable limit) and the estimated merchantable length (i.e., stump to merchantable limit) of this tree. You will not be modifying your Merchantable Volume worksheet for this; instead, use the worksheet to get the answers (i.e. when is the tree too small in width). The merchantable length and merchantable height will be in m. By convention, we keep one decimal place for tree heights and for merchantable lengths. NOTE: We often keep two decimals for distances, and for log lengths, however, and we keep one decimal place for DBH in cm.
+Determine the estimated merchantable height (i.e., from the ground to merchantable 10 cm limit) and the estimated merchantable length (i.e., stump to merchantable limit) of this tree. You will not be modifying your Merchantable Volume worksheet for this; instead, use the worksheet to get the answers (i.e. when is the tree too small in width). The merchantable length and merchantable height will be in m. By convention, we keep one decimal place for tree heights and for merchantable lengths. NOTE: We often keep two decimals for distances, and for log lengths, however, and we keep one decimal place for DBH in cm.
 
 ### Question 6 {.unnumbered}
 
@@ -63,7 +59,7 @@ What is the merchantable volume over total volume proportion? If the tree was la
 
 ### Question 7 {.unnumbered}
 
-How many logs of 2.5 m long could we get from this tree, within the boundaries of the stump height and the minimum diameter inside bark of 10.0 cm? What could be done with the rest of the merchantable part of the tree?
+How many logs of 2.5 m long could we get from this tree, within the boundaries of the stump height and the minimum diameter inside bark of 10.0 cm (i.e. how many 2.5 m logs fit within the merchantable length limit)? What could be done with the rest of the merchantable part of the tree?
 
 ### **Question 8** *Bonus* {.unnumbered}
 
@@ -71,7 +67,11 @@ What is the value of the first log (i.e., the largest one starting at stump heig
 
 ## Task 3 - Whole Tree Volume Models {.unnumbered}
 
-For the same tree large hybrid spruce as in Question 1 of Part I, calculate the estimated total volume using the BC coefficients based on Schumacher’s model (Schumacher and Hall, 1933), but fitted using BC tree data, and compare this to volume using Kozak’s model.You will need to use the Key Equations from Excercise 4 to calculate the volume using the mature douglas fir coefficients. \### Question 9 {.unnumbered} Compare this to the estimated total volume you calculated using Kozak’s taper model for this large hybrid spruce. NOTES: Since these were both found using models, they are both estimated volumes. However, on one hand, the volume models would be expected to be more precise for estimating tree volume since they estimate this directly whereas the volume using the taper model are calculated by first calculating the estimated diameters inside bark up the stem. On the other hand, taper models can be used for more than just estimated total volume (i.e., merchantable volume, log volumes, etc. as you did in Task 1 & 2).
+For the same tree large hybrid spruce as in Question 1 of Part I, calculate the estimated total volume using the BC coefficients based on Schumacher’s model (Schumacher and Hall, 1933), but fitted using BC tree data, and compare this to volume using Kozak’s model. To calculate the tree volume using the Schumacher's model, use the key Equations from Excercise 4 to calculate the volume. Modify the coefficients of the equations used in Exercise 4 using the provided PDF "BC_tree_volume_functio
+
+### Question 9 {.unnumbered}
+
+Compare this to the estimated total volume you calculated using Kozak’s taper model for this large hybrid spruce. NOTES: Since these were both found using models, they are both estimated volumes. However, on one hand, the volume models would be expected to be more precise for estimating tree volume since they estimate this directly whereas the volume using the taper model are calculated by first calculating the estimated diameters inside bark up the stem. On the other hand, taper models can be used for more than just estimated total volume (i.e., merchantable volume, log volumes, etc. as you did in Task 1 & 2).
 
 ## Task 4 - Engaging with the literature {.unnumbered}
 
@@ -87,7 +87,7 @@ Bi H, S Murphy, L Volkova, C Weston, T Fairman, Y Li, R Law, J Norris, X Lei, G.
 
 Then, estimate the aboveground biomass (kg) for a E. regnans that is 120.0 cm DBH (Note: Measured at 1.37 m above ground in Australia) and 51.0 m in height. For this, use Eq. 8 that uses DBH only (labelled as D, cm) or Eq. 10 that uses D2H,(DBH (cm) squared time height (m)) from the paper. The parameter estimates for each of these models and that species are found in Table 2. You will need to calculate the total stem biomass and the crown biomass first, and add them together to get total tree (aboveground) biomass, as shown in Eq. 8 or 10, to get aboveground biomass.
 
-:::{.callout-note}
+::: callout-note
 NOTE: You might want to input these DBH and height measures into Standish et al. (1985) biomass model for mature Coastal Douglas-fir that you already used in Exercise 4 to estimate the kg and use that as a rough guide as to what the estimated biomass might be for this *E. regnans* tree using the Bi et al. (2015) models.
 :::
 
