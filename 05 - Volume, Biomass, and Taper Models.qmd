@@ -2,18 +2,8 @@
 title: "Exercise 5 - Volume, Biomass, and Taper Models"
 format: html
 editor: visual
+author: Prof. Emeritus Valerie LeMay (Updated by Sarah Smith-Tripp)
 ---
-
-```{r echo=FALSE}
-yml_content <- yaml::read_yaml("chapterauthors.yml")
-author <- yml_content[["terrain-spatial-interpolation"]][["author"]]
-```
-
-Written by
-
-```{r results='asis', echo=FALSE}
-cat(author)
-```
 
 ## Lab Overview {.unnumbered}
 
