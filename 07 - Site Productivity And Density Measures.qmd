@@ -35,7 +35,7 @@ As noted, site productivity can be represented a number of ways. Site index of t
 
 1.  calculate site index given site height and age for the leading (i.e., dominant) species
 
-2.  calulate a height versus age trajectory given the site index of a species.
+2.  calculate a height versus age trajectory given the site index of a species.
 
 SIBEC (i.e., SI from BEC site series) tables allow you to also estimate the site index given the site series, which can be used for stands with no trees. You will use **SiteTools** (software) and the **SIBEC tables** (EXCEL file and .pdf file) to answer a number of questions. SiteTools operates in a manner similar to VDYP and to TIPSY. However, before doing this exercise, go through the **Site Tools quick description.docx** file and repeat the example using Site Tools loaded on your desktop.
 
@@ -51,17 +51,15 @@ SIBEC (i.e., SI from BEC site series) tables allow you to also estimate the site
 
 ### Question 1 {.unnumbered}
 
-Use Site Tools to obtain a height trajectory (height over age table) for the top height trees of this stand from 10 to 250 years breast height age. 
+Use Site Tools to obtain a height trajectory (height over age table) for the top height trees of these stands from 10 to 250 years breast height age. 
 
-A.  [Graph this trajectory.]{.underline}
+A.  [Graph trajectories - put all trajectories for polygons on one graph.]{.underline}
 
-B.  Is this a very productive stand? Remember the site index indicates that the average of the best (i.e., top height for BC SI curves) trees is 21 m for CW at 50 years old (breast height age). Also, consider how tall the top height is expected to be at 250 years old (breast height age).
+B.  Describe the productivity of the stand. Remember the site index indicates that the average of the best (i.e., top height for BC SI curves) trees is 21 m for CW at 50 years old (breast height age). Also, consider how tall the top height is expected to be at 250 years old (breast height age).
 
-C.  What would the estimated top height be 10 years from now in 2023 for this stand? *NOTE: The PROJ_Age = 218 years as of 2014, the Reference Date).*
+C.  For each stand - what would the estimated top height be 10 years from now in 2023 for this stand? *NOTE: The PROJ_Age = 218 years as of 2014, the Reference Date).*
 
-D.  Based on what you know about this type of stand, is it likely that the stand would survive to 2033?
-
-E.  Use Site Tools to obtain a height trajectory (height over age table) for the top height trees of this stand from 10 to 250 years breast height age.  [Graph this trajectory.]{.underline}
+D.  Based on what you know about these stand types - is it likely that the stand would survive to 2033?
 
 ### Question 2 {.unnumbered}
 
@@ -79,9 +77,9 @@ Using QGIS, the VRI 2014 and the BEC layers were loaded for MKRF. Then, a query 
 
 For the smallest of the three stands from Ex. 6, POLYID=621 (shown in green in Fig. 1), the BEC polygons were then overlaid onto this VRI forest cover polygon (shown in red in Fig. 1). Three of these BEC site series/site association polygons that overlap with POLYID=621 have been highlighted (label is circled in black).
 
-![Figure 1. Selected CW dominated 2014 VRI polygon (green) with an overlay of site series (red with labels). Three site series polygons that overlap with the VRI polygon are circled in black.](images/clipboard-3187624907.png)
+![Figure 1. Selected CW dominated 2014 VRI polygon (green) with an overlay of site series (red with labels). Three site series polygons that overlap with the VRI polygon are circled in black.](docs/images/clipboard-3187624907.png)
 
-A.  Using one of these site series/site associations within this VRI 2014 polygon, the **FdHw-Salal (03) site series/site association within the CWHdm BEC subzone** (**Vancouver Region**), and the SIBEC table in EXCEL:
+A.  We will use one these site series/site associations located within the VRI 2014 polygon. Specifically we will use **FdHw-Salal (03) site series/site association within the CWHdm BEC subzone** (**Vancouver Region**), and the SIBEC table in EXCEL:
 
     A.  List the estimated SI index values for each species given in the SIBEC table for this site series/site association in a table;
 
@@ -131,7 +129,7 @@ D.  Calculate Curtis’ RD for this plot.
 
 E.  For each tree, calculate the basal area of larger trees (BAL; sum of bahatree for all trees larger than this tree). Which tree is under the highest competition? Lowest competition?
 
-### Question 4 {.unnumbered}
+### Question 5 {.unnumbered}
 
 Stand #1 has 60 m2/ha of basal area and 1000 stems/ha. Stand #2 has 75 m2/ha of basal area and 400 stems/ha.
 
