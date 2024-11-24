@@ -14,6 +14,7 @@ book:
     - 06- VDYP & TIPSY for Forecasting Inventory Records.qmd
     - 07 - Site Productivity And Density Measures.qmd
     - 08 - BC Forest Inventory Variables.qmd
+    - 09 - Using Woodlot to Forecast Small Land Areas.qmd
     - Course Data Description.qmd
   sidebar: 
     style: docked
