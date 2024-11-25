@@ -121,15 +121,11 @@ To become familiar with how VDYP and TIPSY can be used to forecast the growth an
 
 You looked at the 2014 VRI forest cover for MKRF in FRST 556, Ex.1 and 2. Using these data, all stands where western redcedar (*Thuja plicata*) was species with the largest percent were selected using QGIS. The attributes were exported as a .csv file, which was sorted, attributes were trimmed (i.e., some attributes were removed), and then the results were saved as CW dominated polygons trimmed.xlsx. Three of these stands in the northwestern part of MKRF were selected as stands of interest (CW dominated three polygons trimmed.xlsx). A few of the attributes of these polygons are shown in @tbl-polys, and an image of the location of these stands is shown in Figure 1
 
-+----------+------------+------------+------------+----------------+------------------+
-| POLY_ID  | LBL_SPECIS | EST_SI_SPC | EST_SI (m) | CR_CLOSURE (%) | Shape_Ar (in ha) |
-+==========+============+============+============+================+==================+
-| 611      | CwHw(Fd)   | CW         | 20         | 65             | 11.1             |
-+----------+------------+------------+------------+----------------+------------------+
-| 621      | CwHw(Fd)   | CW         | 21         | 65             | 2.1              |
-+----------+------------+------------+------------+----------------+------------------+
-| 622      | CwHw(Fd)   | CW         | 18         | 70             | 7.1              |
-+----------+------------+------------+------------+----------------+------------------+
+| POLY_ID | LBL_SPECIS | EST_SI_SPC | EST_SI (m) | CR_CLOSURE (%) | Shape_Ar (in ha) |
+|---------|------------|------------|------------|----------------|------------------|
+| 611     | CwHw(Fd)   | CW         | 20         | 65             | 11.1             |
+| 621     | CwHw(Fd)   | CW         | 21         | 65             | 2.1              |
+| 622     | CwHw(Fd)   | CW         | 18         | 70             | 7.1              |
 
 : Table 1. Three polygons selected from the western redcedar dominated stands of MKRF (Data Source: VRI 2014 forest cover map, layer 1). {#tbl-polys}
 
@@ -161,17 +157,17 @@ In the CW dominated three polygons **trimmed.xlsx** file, you will also find the
 5.  For each stand, what is current, estimated merchantable volume (12.5 cm + DBH) for the entire stand? HINT: First, determine the stand age as of 2014 using the VRI polygon attributes, and adjust this age to current year (2024) Then, look up the merchantable volume per ha (12.5 cm+ DBH) for that stand age. Finally, determine the current merchantable volume for the entire stand. Report this follow the table below:
     3.  
 
-        +----------+----------+----------+-------------------+------------+-------------------+
-        | Poly_ID  | Age 2014 | Age 2024 | Close Utilization | Shape area | Close Utilization |
-        |          |          |          |                   |            |                   |
-        |          |          |          | (per ha)          | Ha         | (m\^\^3)          |
-        +==========+==========+==========+===================+============+===================+
-        |          |          |          |                   |            |                   |
-        +----------+----------+----------+-------------------+------------+-------------------+
-        |          |          |          |                   |            |                   |
-        +----------+----------+----------+-------------------+------------+-------------------+
-        |          |          |          |                   |            |                   |
-        +----------+----------+----------+-------------------+------------+-------------------+
+        +---------+----------+----------+-------------------+------------+-------------------+
+        | Poly_ID | Age 2014 | Age 2024 | Close Utilization | Shape area | Close Utilization |
+        |         |          |          |                   |            |                   |
+        |         |          |          | (per ha)          | Ha         | (m\^\^3)          |
+        +=========+==========+==========+===================+============+===================+
+        |         |          |          |                   |            |                   |
+        +---------+----------+----------+-------------------+------------+-------------------+
+        |         |          |          |                   |            |                   |
+        +---------+----------+----------+-------------------+------------+-------------------+
+        |         |          |          |                   |            |                   |
+        +---------+----------+----------+-------------------+------------+-------------------+
 6.  Based on the information you now have, would you recommend that any of these stands be harvested in the next 10 years or not? Explain your answer.
 
 ------------------------------------------------------------------------
