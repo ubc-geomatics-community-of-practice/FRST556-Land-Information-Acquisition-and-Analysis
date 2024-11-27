@@ -105,7 +105,9 @@ Stands have a minimum volume of 200 m3/ha before they can be eligible for harves
 ![](images/clipboard-3816718517.png)
 
 3.  Change VDYP utilization to 12.5 cm ![](images/clipboard-1130015492.png)
+
 4.  Calculate yields for each polygon
+
     1.  Before harvesting, we will use VDYP for unmanaged stands. Except where the stands are recently harvested, where we will use TIPSY.
 
     2.  [Post-harvest]{.underline}, yields will be forecast again using VDYP assuming the stand will be identical to the stand pre-harvest, but just starting again at stand age=0.  Again, the exception is stands that were recently harvested. These will be forecasted post-harvest again using TIPSY.
@@ -115,162 +117,200 @@ Stands have a minimum volume of 200 m3/ha before they can be eligible for harves
         1.  This will run [VDYP for each stand using the critical VRI forest attributes]{.underline} to drive VDYP (as you did for three polygons in Exercise 6, but you did that manually entering in the needed VRI attributes into VDYP).
 
             ![](images/clipboard-3106598718.png)
-    4. After calculation, there are some polygons left to forecast. A place for us to investigate more!
 
-    5.  Click on the Polygon View tab
+5.  After calculation, there are some polygons left to forecast. A place for us to investigate more!
 
-    6.  Collapse the non-FMLB folders and the FMLB folder in the Polygons list. Of the 458 polygons, there are 419 FMLB polygons and the remaining polygons are non-FMLB polygons, grouped into four types (lakes, etc.) (See screenshot next page).![](images/clipboard-295154920.png)
+6.  Click on the Polygon View tab
 
-    7.  **Expand the Non-FMLB folders** and **double-click on the first of the non-FMLB (Lake) polygons. Click on the buttons (Small map, Comments, etc.)** to see the map of that polygon, as well as some of the attributes.  **NOTE:  The selected polygons will show up with a “hatched” symbol.  To remove this symbol, double-click on the polygon symbol and it will go back to the original symbol.  ALSO, at any time you can see the full map of all polygons by clicking on the “Map View” tab.**
+7.  Collapse the non-FMLB folders and the FMLB folder in the Polygons list. Of the 458 polygons, there are 419 FMLB polygons and the remaining polygons are non-FMLB polygons, grouped into four types (lakes, etc.) (See screenshot next page).![](images/clipboard-295154920.png)
 
-        1.  You should now have a screen that looks like this:
-        ![](images/clipboard-513237297.png)
+8.  **Expand the Non-FMLB folders** and **double-click on the first of the non-FMLB (Lake) polygons. Click on the buttons (Small map, Comments, etc.)** to see the map of that polygon, as well as some of the attributes.  **NOTE:  The selected polygons will show up with a “hatched” symbol.  To remove this symbol, double-click on the polygon symbol and it will go back to the original symbol.  ALSO, at any time you can see the full map of all polygons by clicking on the “Map View” tab.**
 
-            ### Q1 {.unnumbered} How big is this lake? What is the BC landcover type for this lake polygon? You can use the VRI information to understand this. Note, there are five different land cover classes that go from general to specific.
-            ### Q2 {.unnumbered} Deselect this lake polygon and choose another lake polygon. Provide a screenshot, and add a sentence that notes the size of the lake and the BC landcover type
-    8.  Double-click on one of the non-FMLB (Non-vegetated) polygons and use the tabs to see the map of that polygon, as well as some of the attributes. What is the BC land cover for this polygon? Then, double-click on a few others in the same group.
+    1.  You should now have a screen that looks like this: ![](images/clipboard-513237297.png)
 
-        ### Q3 {.unnumbered} When we first forecasted using VDYP we did so for 419 polygons. Why are there only 419 polygons out of 458 to forecast?
-        ### Q4 {.unnumbered} What are the BC land cover types for these Non-vegetated polygons? Write down the polygon numbers and the land cover types (i.e., the five land cover class levels) for polygons 444, 488, 517, and 978.
-        ### Q5 {.unnumbered} Check polygon 509. Why was this included in the non-FMLB (Non-vegetated) list of polygons? Could it have been included in the non-FMLB (VRI) list? What about the FMLB list? Use the information you have for this polygon as evidence to support your answer.
-    9.  Double-click on one of the non-FMLB (VRI) polygons and use the tabs to see the map of that polygon, as well as some of the attributes. What is the BC land cover for this polygon? Double-click to see the information on a few others in the same group.
+### Q1.{.unnumbered} **How big is this lake? What is the BC landcover type for this lake polygon? You can use the VRI information to understand this. Note, there are five different land cover classes that go from general to specific.**
 
-        ### Q6 {.unnumbered} What are the BC land cover types for these non-FMLB (VRI) polygons? Write down the polygon number and land cover types for polygons 540, 754, and 1012.
-        ### Q7 {.unumbered} Could any of these non-FMLB (VRI) polygons be forested in the future? Consider what would have to be done in the way of management interventions and the cost of these interventions (in a general way, not with specific costs) to create a forested polygon for some of these non-FMLB polygons in your answer.
-    10. Collapse the non-FMLB folder and expand the FMLB folder. Look at the list of polygons that are part of the FMLB. You will see that some of them have the symbol (box) colored green and some are brown (or could be blue). Others have a question mark.
+### Q2. {.unnumbered}
 
-        a.  **Green polygons**: The green ones are polygons that meet the minimum harvest criteria that you set (e.g., minimum DBH and volume per ha) without management interventions (i.e., can be harvested sometime in the forecast period). The yields of the current stand were obtained using VDYP. The assumed harvest was clearcut and post-harvest, the yields would be forecasted using VDYP assuming the stand would be eventually identical to the stand pre-harvest. This could be changed to use TIPSY post-harvest and simulate a planted/naturally regenerated stand with different characteristics than pre-harvest, or using VDYP for partial harvests (via a process that gives approximate yield post-harvest).\
-        b.  **Brown (or blue?) polygons**: The brown (or blue?) polygons do not meet the minimum harvest criteria set within the harvest period (e.g., never reach 350 m3/ha or do not reach the min. DBH required), OR are currently NSR or NC:
-            i.  NSR: Not Satisfactorily Restocked. These sites are considered productive, but not currently restocked. You can choose to Restock the stand and indicate the regeneration delay (when will regeneration occur?), and then by indicating the numbers of types of planted or natural trees. These stands would then be forecasted using TIPSY. (Not done in Scenario 1).
-            ii. NC: Non-Commercial Cover. These are areas that are “non-commercial or damaged sites” that could be converted to productive forests. You would specify “Reforest” which would begin with removal of all trees as part of the stand conversion. TIPSY or VDYP can be used to forecast the future forest. (Not done in Scenario 1).
-        c.  **Polygons with a question mark**: The polygons with a question mark (12 of these.... remember 12 polygons were left to forecast out of the 419 FMLB polygons) are likely recent harvests. There is no VDYP forecast for these polygons since VDYP requires the species composition, site index, crown closure, and age as the minimum inputs to forecast the yields of an existing stand. You will need to fix each one of these to use TIPSY instead.
-    11. Double-click on a few of the green-colored FMLB polygons to see the current VRI information as well as the forecasted yields. For example, for Polygon 456, here are two screenshots:
+**Deselect this lake polygon and choose another lake polygon. Provide a screenshot, and add a sentence that notes the size of the lake and the BC landcover type.**
 
-        ![](images/clipboard-1366920372.png)
-        ![](images/clipboard-1534820302.png)
-        1.  **Important NOTE on ages:** In the graph, there are **three ages:** 1) “**Harvest age**” is [when the stand meets the harvest criteria]{.underline} you set in the Project panel; 2) “**Culmination Age**” (i.e., *biological rotation age* at maximum m.a.i.); and 3) “**Reference age**” which is age of this stand in 2020 (the date for the VRI projected data) ..!). The stand could be harvested by *Woodlot* at the “Harvest Age” or the culmination age, ***whichever is greater***!
+### Q3. {.unnumbered}
 
-    12. We can control a lot in protocols for example . For example, if we wanted to add an area for reserves we could reduct the areas as follows:
+**When we first forecasted using VDYP we did so for 419 polygons. Why are there only 419 polygons out of 458 to forecast?**
 
-        ![](images/clipboard-1993978038.png)
-    13. Let's hone in on the polygons that we did not calculate use VDYP to calculate a projection with - even though they are FMLB polygons. First, double-click on polygon 1154 - here the VRI information says that this is a non-vegetation polygon (BC land class), but there is a super high index value (34.0, calculated with SIBEC)
+### Q4. {.unnumbered}
 
-    14. Double-click on all of the polygons that have a ? this will add them into your 'selected'
+**What are the BC land cover types for these Non-vegetated polygons? Write down the polygon numbers and the land cover types (i.e., the five land cover class levels) for polygons 444, 488, 517, and 978.**
 
-        1.  Click on the **Map View** to see where these polygons are around the landscape
+### Q5. {.unnumbered}
 
-        2.  Click on **Tabular View** tab
+**Check polygon 509. Why was this included in the non-FMLB (Non-vegetated) list of polygons? Could it have been included in the non-FMLB (VRI) list? What about the FMLB list? Use the information you have for this polygon as evidence to support your answer.**
 
-        3.  At the top of the table of polygons, choose **“VRI”** as the column filter. Also, click on **“Selected Only”, “Friendly Headers”** and “**Expand Codes**”.
+### Q6. {.unnumbered}
 
-        4.  All of these polygons had no trees at the time of the inventory (Ref Date is 2000 or 2004).  All of these have a BEC estimated SI value (SIBEC) and all were included in the FMLB.  
+**What are the BC land cover types for these non-FMLB (VRI) polygons? Write down the polygon number and land cover types for polygons 540, 754, and 1012.**
 
-    15. To project the yields for these 12 stands, you will need to click on each one and change from the VDYP projection pre- and post harvest to TIPSY
+### Q7. {.unnumbered}
 
-        1.   Starting with polygon 1510 change the left side with VDYP to be "Clearcut (Reforest To)"
+**Could any of these non-FMLB (VRI) polygons be forested in the future? Consider what would have to be done in the way of management interventions and the cost of these interventions (in a general way, not with specific costs) to create a forested polygon for some of these non-FMLB polygons in your answer.**
 
-        2.  For the existing Forest box on the left, change the age from <na> to 0 years.
+10. Collapse the non-FMLB folder and expand the FMLB folder. Look at the list of polygons that are part of the FMLB. You will see that some of them have the symbol (box) colored green and some are brown (or could be blue). Others have a question mark.
 
-        3.  Change the right from VDYP to TIPSY and change the species to Coastal Douglas fir. It will be 100% coastal Douglas fir and natural regeneration. The bottom box should look as follows:
+    a.  **Green polygons**: The green ones are polygons that meet the minimum harvest criteria that you set (e.g., minimum DBH and volume per ha) without management interventions (i.e., can be harvested sometime in the forecast period). The yields of the current stand were obtained using VDYP. The assumed harvest was clearcut and post-harvest, the yields would be forecasted using VDYP assuming the stand would be eventually identical to the stand pre-harvest. This could be changed to use TIPSY post-harvest and simulate a planted/naturally regenerated stand with different characteristics than pre-harvest, or using VDYP for partial harvests (via a process that gives approximate yield post-harvest).
+    b.  **Brown (or blue?) polygons**: The brown (or blue?) polygons do not meet the minimum harvest criteria set within the harvest period (e.g., never reach 350 m3/ha or do not reach the min. DBH required), OR are currently NSR or NC: i. NSR: Not Satisfactorily Restocked. These sites are considered productive, but not currently restocked. You can choose to Restock the stand and indicate the regeneration delay (when will regeneration occur?), and then by indicating the numbers of types of planted or natural trees. These stands would then be forecasted using TIPSY. (Not done in Scenario 1). ii. NC: Non-Commercial Cover. These are areas that are “non-commercial or damaged sites” that could be converted to productive forests. You would specify “Reforest” which would begin with removal of all trees as part of the stand conversion. TIPSY or VDYP can be used to forecast the future forest. (Not done in Scenario 1).
+    c.  **Polygons with a question mark**: The polygons with a question mark (12 of these.... remember 12 polygons were left to forecast out of the 419 FMLB polygons) are likely recent harvests. There is no VDYP forecast for these polygons since VDYP requires the species composition, site index, crown closure, and age as the minimum inputs to forecast the yields of an existing stand. You will need to fix each one of these to use TIPSY instead.
 
-            ![](images/clipboard-919894664.png)
-        4.  Hit "Calculate Yield" tab - note that this will decrease the total number of polygons we have to down 1.
+11. Double-click on a few of the green-colored FMLB polygons to see the current VRI information as well as the forecasted yields. For example, for Polygon 456, here are two screenshots:
 
-    16.  Repeat this for all polygons until there are no polygons left to do.
+    ![](images/clipboard-1366920372.png)
 
-    17.  Return to the **Map View** tab once more - look at the map of polygons.
+    ![](images/clipboard-1534820302.png)
 
-    18. Now we will simulate a forecast for our scenario for 250 years. To do so follow these steps:
+12. **Important NOTE on ages:** In the graph, there are **three ages:** 1) “**Harvest age**” is [when the stand meets the harvest criteria]{.underline} you set in the Project panel; 2) “**Culmination Age**” (i.e., *biological rotation age* at maximum m.a.i.); and 3) “**Reference age**” which is age of this stand in 2020 (the date for the VRI projected data) ..!). The stand could be harvested by *Woodlot* at the “Harvest Age” or the culmination age, ***whichever is greater***!
 
-        1.  Click on the **Calculations Tab.** Now you will simulate the harvests and calculate the harvest that might be sustained over a 250-year period (although Woodlot assumes “non-declining
-            flow”).  You will also obtain a list indicating when each polygon might be harvested. 
+13. We can control a lot in protocols for example . For example, if we wanted to add an area for reserves we could reduct the areas as follows:
 
-        2.  For this order of harvest, **put a check mark for the Oldest First and remove any other check marks:**
+    ![](images/clipboard-1993978038.png)
 
-            ![](images/clipboard-2473939608.png)
-            This creates a harvest schedule list of polygons in order of harvest, including harvest
-            starts and stops, the age, and the volume that would be harvested (screenshot
-            next).  You can click on other items to get more information as well.
-        3.  Then**, click on Calculate and leave this as Auto – Harvest Rate (m^3^/year) at the bottom of the screen.**
+14. Let's hone in on the polygons that we did not calculate use VDYP to calculate a projection with - even though they are FMLB polygons. First, double-click on polygon 1154 - here the VRI information says that this is a non-vegetation polygon (BC land class), but there is a super high index value (34.0, calculated with SIBEC)
 
-        4.  This creates a harvest schedule list of polygons in order of harvest, including harvest
-            starts and stops, the age, and the volume that would be harvested (screenshot
-            next).  You can click on other items to get more information as well. **You can also click on each polygon and see where that polygon is planned for harvesting**![](images/clipboard-1119743642.png)
-        5.  The graph included above is a [stacked graph]{.underline} of [non-harvestable volume (the bottom line) + mature timber (middle line) + immature  volume (top line)]{.underline}. 
+15. Double-click on all of the polygons that have a ? this will add them into your 'selected'
 
-        6.  We also see that the AAC and the LRSY are included at the base ![](images/clipboard-859473351.png)
+16. Click on the **Map View** to see where these polygons are around the landscape
 
-        7.  **Click on the Plotsy icon** to get a better graph of the Standing Volume over time  
+17. Click on **Tabular View** tab
 
-            \[NOTE: The y-axis label says m^3^ X 100,000 versus time\]. [Take a screen shot of your graph (Questions 9 and 10)]{.underline}.  [Take a screen shot of your graph and make sure to add this to your]{.underline} **Ex9** WORD file.
-        8.  Now back on the Woodlot screen, **Click on Reports Age Distribution Map**.  [Take a screenshot and add this to your Ex9 WORD file.]{.underline}  (Question 13 and Q14). NOTE: This graph shows the [ages across the x-axis]{.underline}, and then the [colors indicate the forecast period]{.underline}. For example, to “see” the age class distribution at the beginning of the forecast period, ignore all other bars except the 1^st^ one at each age (were the green bars for me, Year 0). To “see” the age distribution at the end of the forecast period, only pay attention to the last bar for each age class (were the pink bars for me, Year 250).
+18. At the top of the table of polygons, choose **“VRI”** as the column filter. Also, click on **“Selected Only”, “Friendly Headers”** and “**Expand Codes**”.
 
-        9.  **Click on Reports and create a Woodlot Report**. This prepares a document for you (an .rtf file than can be saved as a .docx file) with some outputs already entered into the report. Save your Woodlot report somewhere to access again.
+19. All of these polygons had no trees at the time of the inventory (Ref Date is 2000 or 2004).  All of these have a BEC estimated SI value (SIBEC) and all were included in the FMLB.  
 
-            ### Q8.  What was the AAC for Scenario 1?  
-            ### Q9.  Add captions to your screen shot of the volume stocks forecast in your **Ex9** WORD file (i.e., Figure 1 ??add the description?) and to your screen shot of the age distribution over time in your Ex9 WORD file (i.e., Figure 2 ?add the description???). 
-            ### Q10.  What happened in this forecasted management scenario? Refer to your stocks over time and age distribution over time graphs, and your scenario1.docx Woodlot report in answering these questions.1) Were the volume stocks maintained over time (i.e., almost the same at the beginning and end of the forecast period) or were they lower or higher at the end of the period than at the start of the period?  How much were these stocks over time?  2) What happened to the age class distribution at the beginning of the forecast period (which bar color for Year 0) versus the end of the forecast period (which color for Year 250)? 
------------------------------------------------------------------------------------------------------------------------------------------------
+20. To project the yields for these 12 stands, you will need to click on each one and change from the VDYP projection pre- and post harvest to TIPSY
+
+21. Starting with polygon 1510 change the left side with VDYP to be "Clearcut (Reforest To)"
+
+22. For the existing Forest box on the left, change the age from <na> to 0 years.
+
+23. Change the right from VDYP to TIPSY and change the species to Coastal Douglas fir. It will be 100% coastal Douglas fir and natural regeneration. The bottom box should look as follows:
+
+    ![](images/clipboard-919894664.png) 4. Hit "Calculate Yield" tab - note that this will decrease the total number of polygons we have to down 1.
+
+24. Repeat this for all polygons until there are no polygons left to do.
+
+25. Return to the **Map View** tab once more - look at the map of polygons.
+
+26. Now we will simulate a forecast for our scenario for 250 years. To do so follow these steps:
+
+27. Click on the **Calculations Tab.** Now you will simulate the harvests and calculate the harvest that might be sustained over a 250-year period (although Woodlot assumes “non-declining flow”).  You will also obtain a list indicating when each polygon might be harvested. 
+
+28. For this order of harvest, **put a check mark for the Oldest First and remove any other check marks:**
+
+    ![](images/clipboard-2473939608.png) This creates a harvest schedule list of polygons in order of harvest, including harvest starts and stops, the age, and the volume that would be harvested (screenshot next).  You can click on other items to get more information as well.
+
+29. Then**, click on Calculate and leave this as Auto – Harvest Rate (m^3^/year) at the bottom of the screen.**
+
+30. This creates a harvest schedule list of polygons in order of harvest, including harvest starts and stops, the age, and the volume that would be harvested (screenshot next).  You can click on other items to get more information as well. **You can also click on each polygon and see where that polygon is planned for harvesting**![](images/clipboard-1119743642.png)
+
+31. The graph included above is a [stacked graph]{.underline} of [non-harvestable volume (the bottom line) + mature timber (middle line) + immature  volume (top line)]{.underline}. 
+
+32. We also see that the AAC and the LRSY are included at the base ![](images/clipboard-859473351.png)
+
+33. **Click on the Plotsy icon** to get a better graph of the Standing Volume over time  
+
+    \[NOTE: The y-axis label says m^3^ X 100,000 versus time\]. [Take a screen shot of your graph (Questions 9 and 10)]{.underline}.  [Take a screen shot of your graph and make sure to add this to your]{.underline} **Ex9** WORD file.
+
+34. Now back on the Woodlot screen, **Click on Reports Age Distribution Map**.  [Take a screenshot and add this to your Ex9 WORD file.]{.underline}  (Question 13 and Q14). NOTE: This graph shows the [ages across the x-axis]{.underline}, and then the [colors indicate the forecast period]{.underline}. For example, to “see” the age class distribution at the beginning of the forecast period, ignore all other bars except the 1^st^ one at each age (were the green bars for me, Year 0). To “see” the age distribution at the end of the forecast period, only pay attention to the last bar for each age class (were the pink bars for me, Year 250).
+
+35. **Click on Reports and create a Woodlot Report**. This prepares a document for you (an .rtf file than can be saved as a .docx file) with some outputs already entered into the report. Save your Woodlot report somewhere to access again.
+
+### Q8. {.unnumbered}
+
+**What was the AAC for Scenario 1?**
+
+### Q9. {.unnumbered}
+
+**For Scenario 1, add captions to your screenshot of the volume stocks forecast in your Ex9 WORD file (i.e., Figure 1) and to your screenshot of the age distribution over time in your Ex9 WORD file.**
+
+### Q10. {.unnumbered}
+
+**What happened in this forecasted management scenario? Refer to your stocks over time and age distribution over time graphs, and your scenario1.docx Woodlot report in answering these questions.1) Were the volume stocks maintained over time (i.e., almost the same at the beginning and end of the forecast period) or were they lower or higher at the end of the period than at the start of the period?  How much were these stocks over time?  2) What happened to the age class distribution at the beginning of the forecast period (which bar color for Year 0) versus the end of the forecast period (which color for Year 250)?**
+
+------------------------------------------------------------------------
 
 ## Scenario 2. {.unnumbered}
-            1.First, go to the **Project Tab** and change this to Scenario 2 (the rest will be the same on this screen).
-            2. Save this as **scenario2.wlt.**
 
-            3. Then, go to the **Calculations Tab.** Change this to be [not Auto]{.underline} (i.e., remove the check mark).  Put in a much higher value than the AAC that was calculated (shown here as here 30,000 m^3^/year, closer to  LRSY), and hit Calculate again. 
+1.  First, go to the **Project Tab** and change this to Scenario 2 (the rest will be the same on this screen).
 
-            3. Save this project as **scenario2.wlt** again.
+2.  Save this as **scenario2.wlt.**
 
-            4. **Click on the Plotsy icon** to get a better graph of the Standing Volume over time 
+3.  Then, go to the **Calculations Tab.** Change this to be [not Auto]{.underline} (i.e., remove the check mark).  Put in a much higher value than the AAC that was calculated (shown here as here 30,000 m^3^/year, closer to  LRSY), and hit Calculate again.
 
-            ### Q11.  What was the AAC for Scenario 2? Briefly explain why this differs from Scenario 1.
-            ### Q12.  Add a figure number and a caption to your screen shot of the volume stocks forecast in your **Ex9** file. 
-            ### Q13.  Were the volume stocks maintained over time (i.e., almost the same at the beginning and end of the forecast period) or were they lower or higher at the end of the period than at the start of the period?  Refer to your stocks over time graph in answering this question.
-            [Take a screen shot of your graph and add this to your]{.underline} **Ex9 WORD file** (see Question 16).
-            5. **Click on Reports à Woodlot Report**. This prepares a document for you (an .rtf file than can be saved as a .docx file) with some outputs already entered into the report. Save your Woodlot report in **Scenario2.docx**
------------------------------------------------------------------------------------------------------------------------------------------------
+4.  Save this project as **scenario2.wlt** again.
+
+5.  **Click on the Plotsy icon** to get a better graph of the Standing Volume over time 
+
+### Q11. {.unnumbered}
+
+**What was the AAC for Scenario 2? Briefly explain why this differs from Scenario 1.**
+
+### Q12. {.unnumbered}
+
+**Add a figure number and a caption to your screenshot of the volume stocks forecast in your Ex9 WORD file.**
+
+### Q13. {.unnumbered}
+
+**Were the volume stocks maintained over time (i.e., almost the same at the beginning and end of the forecast period) or were they lower or higher at the end of the period than at the start of the period? Refer to your stocks over time graph in answering this question.** 5. **Click on Reports à Woodlot Report**. This prepares a document for you (an .rtf file than can be saved as a .docx file) with some outputs already entered into the report. Save your Woodlot report in **Scenario2.docx** -----------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Scenario 3. {.unnumbered}
+
 For Scenario 3, you will again forecast post-harvest using VDYP and cut the oldest first out of the stands the meet the eligibility criteria in Scenarios 1 and 2, but you will again allow Woodlot to calculate the AAC as in Scenario 1. Further, you will change the eligibility criteria to be:
 
-            1)     The utilization level for VDYP will be set to 12.5 cm DBH + (no change).
+1.   The utilization level for VDYP will be set to 12.5 cm DBH + (no change).
 
-            2)     Stands must be at least 60 years (no change), with a minimum DBH of 40 cm ([lower]{.underline}), and a minimum volume of 200 m^3^/ha (for all trees 12.5 cm DBH+, [lower]{.underline}) before they can be eligible for harvest.
+2.  Stands must be at least 60 years (no change), with a minimum DBH of 40 cm ([lower]{.underline}), and a minimum volume of 200 m^3^/ha (for all trees 12.5 cm DBH+, [lower]{.underline}) before they can be eligible for harvest.
 
-            3)     The regeneration delay (i.e., time before new trees become established) is 5 years (no change).
+3.  The regeneration delay (i.e., time before new trees become established) is 5 years (no change).
 
-            4)     VDYP and TIPSY will be used as in Scenarios 1 and 2 (no change).
+4.  VDYP and TIPSY will be used as in Scenarios 1 and 2 (no change).
 
-            5)     Stands eligible to harvest will be selected using “oldest first” (no change).
+5.  Stands eligible to harvest will be selected using “oldest first” (no change).
 
-            [*Steps to run Woodlot for Scenarios 3*]{.underline}
+6.  The AAC will be calculated by Woodlot (no change).
 
-            **1.      Go back to the Project tab** andchange  this to Scenario 3, the Harvest Criteria to 60 years, 40 cm DBH, 200 m^3^/ha, and 5 years regen delay. 
+[*Steps to run Woodlot for Scenarios 3*]{.underline}
 
-            3.    Save this project as **scenario3.wlt**
+1.   **Go back to the Project tab** and change this to Scenario 3, the Harvest Criteria to 60 years, 40 cm DBH, 200 m^3^/ha, and 5 years regen delay. 
 
-            4.    Then, click on **Calculate Yields first.**
+2.   Save this project as **scenario3.wlt** 3.
 
-            5.    **Then click on the Calculate Tab,**
+3.  Then, click on **Calculate Yields first.**
 
-            ### 6.    **First, change this back to Auto (i.e., add the check mark again and calculate the AAC).** 
+4.  4.**Then click on the Calculate Tab,**
 
-            7.    **Click on the Plotsy icon** to get a better graph of the Standing Volume over time 
+5.  **First, change this back to Auto (i.e., add the check mark again and calculate the AAC).**
 
-            [Take a screen shot of your graph and add this to your]{.underline} **Ex9** WORD file.
+6.   **Click on the Plotsy icon** to get a better graph of the Standing Volume over time  [Take a screen shot of your graph and add this to your]{.underline} **Ex9** WORD file.
 
-            8.    **Click on Reports à Woodlot Report**. This prepares a document for you (an .rtf file than can be saved as a .docx file) with some outputs already entered into the report. Save your Woodlot report in **Scenario3.docx**
+7.   **Click on Reports and create Woodlot Report**. This prepares a document for you (an .rtf file than can be saved as a .docx file) with some outputs already entered into the report. Save your Woodlot report in **Scenario3.docx**
 
-            ### Q14.  What was the AAC for Scenario 3, which had a lower minimum merchantable volume/ha and lower minimum average DBH criteria for harvest eligibility? 
+### Q14. {.unnumbered}
 
-            ### Q15.  Add a label a caption to your screen shot of the volume stocks forecast in your **Ex9** WORD file. 
+**What was the AAC for Scenario 3, which had a lower minimum merchantable volume/ha and lower minimum average DBH criteria for harvest eligibility?**
 
-            ### Q16.  Were the volume stocks maintained over time (i.e., almost the same at the beginning and end of the forecast period) or were they lower or higher at the end of the period than at the start of the period?  Refer to your stocks over time graph in answering this question.
+### Q15. {.unnumbered}
 
------------------------------------------------------------------------------------------------------------------------------------------------
+**Add a label and caption to your screenshot of the volume stocks forecast in your Ex9 WORD file.**
+
+### Q16. {.unnumbered}
+
+**Were the volume stocks maintained over time (i.e., almost the same at the beginning and end of the forecast period) or were they lower or higher at the end of the period than at the start of the period? Refer to your stocks over time graph in answering this question.**
+
+------------------------------------------------------------------------
 
 ## Summarize across scenarios. {.unnumbered}
 
-### Q17. What were the main differences in the scenarios? Write up 1-2 paragraphs comparing the scenarios. Also, indicate which of these three scenarios you would recommend and justify your choice. Finally, recommend an alternative scenario that you might want to consider running, and why you might want to run this scenario (no need to run this in Woodlot, though).  
+### Q17. {.unnumbered}
+
+**What were the main differences in the scenarios? Write up 1-2 paragraphs comparing the scenarios. Also, indicate which of these three scenarios you would recommend and justify your choice. Finally, recommend an alternative scenario that you might want to consider running, and why you might want to run this scenario (no need to run this in Woodlot, though).**
 
 ## Lab Questions & Deliverables {.unnumbered}
 
@@ -304,7 +344,9 @@ For Scenario 3, you will again forecast post-harvest using VDYP and cut the olde
 
 15.  Add a label a caption to your screen shot of the volume stocks forecast in your **Ex9** WORD file. 
 
-16.  Were the volume stocks maintained over time (i.e., almost the same at the beginning and end of the forecast period) or were they lower or higher at the end of the period than at the start of the period?  Refer to your stocks over time graph in answering this question.
+16. Were the volume stocks maintained over time (i.e., almost the same at the beginning and end of the forecast period) or were they lower or higher at the end of the period than at the start of the period?  Refer to your stocks over time graph in answering this question.
+
+17. What were the main differences in the scenarios? Write up 1-2 paragraphs comparing the scenarios. Also, indicate which of these three scenarios you would recommend and justify your choice. Finally, recommend an alternative scenario that you might want to consider running, and why you might want to run this scenario (no need to run this in Woodlot, though). 
 
     ### 
 
